@@ -16,6 +16,9 @@ spec:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
+        {{- if .Values.environmentVariables.configMap }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- end }}
       {{- end }}
       labels:
         {{- include "client.selectorLabels" . | nindent 8 }}
@@ -35,8 +38,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.service.targetPort}}
               protocol: TCP
+            - name: https
+              containerPort: {{ .Values.service.targetPort}}
+              protocol: TCP
+          {{- if .Values.environmentVariables.configMap }}
+          envFrom:
+          - configMapRef:
+              name: {{ include "client.fullname" . }}
+          {{- end }}
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           livenessProbe:
             httpGet:
               path: /
