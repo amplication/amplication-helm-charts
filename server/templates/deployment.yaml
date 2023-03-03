@@ -83,7 +83,7 @@ spec:
             initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds | default 60 }}
             periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds | default 60 }}
           {{- end }}
-          {{- end}}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.volumes }}
