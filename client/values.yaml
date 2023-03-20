@@ -16,6 +16,17 @@ imagePullSecrets: {}
 environmentVariables:
   configMap: {}
 
+healthCheck:
+  enabled: true
+  readinessProbe:
+    enabled: false
+    path: /_health/ready
+    port: 3000
+  livenessProbe:
+    enabled: false
+    path: /_health/live
+    port: 3000
+
 nameOverride: ""
 
 fullnameOverride: ""
