@@ -1,0 +1,80 @@
+{{- if .Values.events.sensor.enabled -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: {{ .Values.events.sensor.name }}
+  labels:
+    {{- include "data-service-generator.labels" . | nindent 4 }}
+spec:
+  template:
+    serviceAccountName: {{ include "data-service-generator.serviceAccountName" . }}
+  dependencies:
+    - name: request
+      eventSourceName: {{ .Values.events.eventSource.name }}
+      eventName: dsg
+  triggers:
+    - template:
+        name: {{ .Values.events.sensor.templateName }}
+        k8s:
+          operation: create
+          source:
+            resource:
+              apiVersion: batch/v1
+              kind: Job
+              metadata:
+                generateName: {{ .Values.events.sensor.generateName }}
+              spec:
+                template:
+                  spec:
+                    {{- with .Values.imagePullSecrets }}
+                    imagePullSecrets:
+                      {{- toYaml . | nindent 22 }}
+                    {{- end }}
+                    {{- with .Values.nodeSelector }}
+                    nodeSelector:
+                      {{- toYaml . | nindent 22 }}
+                    {{- end }}
+                    {{- with .Values.tolerations }}
+                    tolerations:
+                      {{- toYaml . | nindent 22 }}
+                    {{- end }}
+                    restartPolicy: Never
+                    containers:
+                      - name: {{ include "data-service-generator.fullname" . }}
+                        image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+                        command: ["sh", "-c"]
+                        args: ["cd /workspace/packages/data-service-generator; node ./src/main.js"]
+                        imagePullPolicy: {{ .Values.image.imagePullPolicy | default "IfNotPresent" }}
+                        env:
+                          - name: BUILD_ID
+                            value: null
+                          - name: RESOURCE_ID
+                            value: null
+                          - name: BUILD_MANAGER_URL
+                            value: {{ .Values.events.sensor.variables.buildManagerUrl | default "http://build-manager" }}
+                          - name: REMOTE_ENV
+                            value: {{ .Values.events.sensor.variables.remoteEnv | default true }}
+                          - name: BUILD_SPEC_PATH
+                            value: {{ .Values.events.sensor.variables.buildSpecPath | default "/efs/input.json" }}
+                          - name: BUILD_OUTPUT_PATH
+                            value: {{ .Values.events.sensor.variables.buildOutputPath | default "/efs/code" }}
+                        volumeMounts:
+                          - name: {{ include "data-service-generator.fullname" . }}-{{ .Values.storage.dataServiceGenerator.suffix }}-volume
+                            mountPath: "/efs"
+                            subPathExpr: $(BUILD_ID)
+                    volumes:
+                      - name: {{ include "data-service-generator.fullname" . }}-{{ .Values.storage.dataServiceGenerator.suffix }}-volume
+                        persistentVolumeClaim:
+                          claimName: {{ include "data-service-generator.fullname" . }}-{{ .Values.storage.dataServiceGenerator.suffix }}-pvc
+                ttlSecondsAfterFinished: {{ .Values.events.sensor.ttlSecondsAfterFinished }}
+                backoffLimit: 0
+          parameters:
+            - src:
+                dependencyName: request
+                dataKey: body.buildId
+              dest: spec.template.spec.containers.0.env.0.value
+            - src:
+                dependencyName: request
+                dataKey: body.resourceId
+              dest: spec.template.spec.containers.0.env.1.value
+{{- end }}

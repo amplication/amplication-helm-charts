@@ -1,0 +1,39 @@
+{{- if .Values.storage.main.enabled -}}
+{{- with .Values.storage.main }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "data-service-generator.fullname" $ }}{{ .suffix | default "main" }}-pvc
+  labels:
+    {{- include "data-service-generator.labels" $ | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: {{ include "data-service-generator.fullname" $ }}{{ .suffix | default "main" }}-pv
+  storageClassName: {{ .storageClassName }}
+  volumeMode: Filesystem
+{{- end }}
+{{- end }}
+---
+{{- if .Values.storage.dataServiceGenerator.enabled -}}
+{{- with .Values.storage.dataServiceGenerator }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "data-service-generator.fullname" $ }}-{{ .suffix | default "dsg" }}-pvc
+  labels:
+    {{- include "data-service-generator.labels" $ | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: {{ include "data-service-generator.fullname" $ }}{{ .suffix | default "dsg" }}-pv
+  storageClassName: {{ .storageClassName }}
+  volumeMode: Filesystem
+{{- end }}
+{{- end }}

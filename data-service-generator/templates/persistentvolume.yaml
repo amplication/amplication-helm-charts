@@ -1,0 +1,43 @@
+{{- if .Values.storage.main.enabled -}}
+{{- with .Values.storage.main }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "data-service-generator.fullname" $ }}-{{ .suffix | default "main" }}-pv
+  labels:
+    {{- include "data-service-generator.labels" $ | nindent 4 }}
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .storageClassName }}
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: {{ .persistentVolume.volumeHandle }}
+{{- end }}
+{{- end }}
+---
+{{- if .Values.storage.dataServiceGenerator.enabled -}}
+{{- with .Values.storage.dataServiceGenerator }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "data-service-generator.fullname" $ }}-{{ .suffix | default "dsg" }}-pv
+  labels:
+    {{- include "data-service-generator.labels" $ | nindent 4 }}
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  storageClassName: {{ .storageClassName }}
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: {{ .persistentVolume.volumeHandle }}
+{{- end }}
+{{- end }}
