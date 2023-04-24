@@ -16,7 +16,6 @@ storage:
     suffix: dsg
     storageClassName: efs-dsg-sc
     persistentVolume:
-      name: dsg-jobs
       volumeHandle: <path:environment-shared/data/efs/dsg/fs#volume_handle>
     persistentVolumeClaim: {}
   main:
@@ -24,7 +23,6 @@ storage:
     suffix: main
     storageClassName: efs-main-sc
     persistentVolume:
-      name: build-artifacts
       volumeHandle: <path:environment-shared/data/efs/main/fs#volume_handle>
     persistentVolumeClaim: {}
 
