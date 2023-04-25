@@ -17,6 +17,9 @@ spec:
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.environmentVariables.configMap }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
       labels:
         {{- include "plugin-api.selectorLabels" . | nindent 8 }}
     spec:
@@ -27,6 +30,19 @@ spec:
       serviceAccountName: {{ include "plugin-api.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: "{{ .Values.name }}-migrate"
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh"]
+          args: ["-c", "npx prisma migrate deploy --schema prisma/schema.prisma", ";", "exit"]
+          env:
+          - name: POSTGRESQL_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.name }}
+                key: POSTGRESQL_URL
+                optional: false
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -37,14 +53,39 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            - name: https
+              containerPort: {{ .Values.service.targetPort}}
+              protocol: TCP
+          {{- if .Values.environmentVariables.configMap }}
+          envFrom:
+          - configMapRef:
+              name: {{ include "plugin-api.fullname" . }}
+          {{- end }}
+          {{- if .Values.environmentVariables.environment }}
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          {{- end }}
+          {{- if .Values.healthCheck.enabled }}
+          {{- if .Values.healthCheck.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /
-              port: http
+              path: {{ .Values.healthCheck.readinessProbe.path }}
+              port: {{ .Values.healthCheck.readinessProbe.port }}
+            initialDelaySeconds: {{ .Values.healthCheck.readinessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.healthCheck.readinessProbe.periodSeconds | default 5 }}
+          {{- end }}
+          {{- if .Values.healthCheck.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthCheck.livenessProbe.path }}
+              port: {{ .Values.healthCheck.livenessProbe.port }}
+            initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds | default 60 }}
+            periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds | default 60 }}
+          {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
