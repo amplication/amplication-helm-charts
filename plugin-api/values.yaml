@@ -1,3 +1,9 @@
+environment: sandbox
+
+istio:
+  hostname: example.com
+  gatewayName: main-gateway
+
 replicaCount: 1
 
 image:
@@ -5,9 +11,7 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 
-istio:
-  hostname: example.com
-  gatewayName: main-gateway
+imagePullSecrets: []
 
 environmentVariables:
   configMap: {}
@@ -28,13 +32,10 @@ healthCheck:
   readinessProbe:
     enabled: false
     path: /_health/ready
-    port: 3000
   livenessProbe:
     enabled: false
     path: /_health/live
-    port: 3000
 
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
