@@ -16,9 +16,9 @@ spec:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
-        {{- if .Values.environmentVariables.configMap }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        {{- end }}
+      {{- end }}
+      {{- if .Values.environmentVariables.configMap }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
       {{- end }}
       labels:
         {{- include "server.selectorLabels" . | nindent 8 }}
@@ -61,11 +61,13 @@ spec:
           - configMapRef:
               name: {{ include "server.fullname" . }}
           {{- end }}
+          {{- if .Values.environmentVariables.environment }}
           env:
             - name: ENVIRONMENT
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          {{- end }}
           {{- if .Values.healthCheck.enabled }}
           {{- if .Values.healthCheck.readinessProbe.enabled }}
           readinessProbe:
