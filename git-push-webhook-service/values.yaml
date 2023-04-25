@@ -7,7 +7,7 @@ istio:
 replicaCount: 1
 
 image:
-  repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-git-pull-service
+  repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-git-push-webhook-service
   pullPolicy: IfNotPresent
   tag: ""
 

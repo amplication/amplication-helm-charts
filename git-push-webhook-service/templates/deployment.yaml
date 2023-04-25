@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "git-pull-service.fullname" . }}
+  name: {{ include "git-push-webhook-service.fullname" . }}
   labels:
-    {{- include "git-pull-service.labels" . | nindent 4 }}
+    {{- include "git-push-webhook-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "git-pull-service.selectorLabels" . | nindent 6 }}
+      {{- include "git-push-webhook-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -21,13 +21,13 @@ spec:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       {{- end }}
       labels:
-        {{- include "git-pull-service.selectorLabels" . | nindent 8 }}
+        {{- include "git-push-webhook-service.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "git-pull-service.serviceAccountName" . }}
+      serviceAccountName: {{ include "git-push-webhook-service.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -41,7 +41,7 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
             - name: https
-              containerPort: {{ .Values.service.port}}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
           {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
           envFrom:

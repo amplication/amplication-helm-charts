@@ -1,0 +1,9 @@
+{{- if .Values.environmentVariables.configMap }}
+apiVersion: v1
+kind: ConfigMap
+  name: {{ include "git-push-webhook-service.fullname" . }}
+  labels:
+    {{- include "git-push-webhook-service.labels" . | nindent 4 }}
+data: 
+  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
+{{- end }}
