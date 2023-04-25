@@ -1,6 +1,7 @@
 environment: sandbox
 
 istio:
+  enabled: true
   hostname: example.com
   gatewayName: main-gateway
 
@@ -21,14 +22,11 @@ healthCheck:
   readinessProbe:
     enabled: false
     path: /_health/ready
-    port: 3000
   livenessProbe:
     enabled: false
     path: /_health/live
-    port: 3000
 
 nameOverride: ""
-
 fullnameOverride: ""
 
 serviceAccount:
@@ -55,13 +53,7 @@ ingress:
           pathType: ImplementationSpecific
   tls: []
 
-resources:
-  limits:
-    cpu: 1
-    memory: 1Gi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+resources: {}
 
 autoscaling:
   enabled: false
