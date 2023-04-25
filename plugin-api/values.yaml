@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-plugin-api
   pullPolicy: IfNotPresent
   tag: ""
 
