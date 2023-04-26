@@ -38,10 +38,10 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
             - name: https
-              containerPort: {{ .Values.service.port}}
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
           {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
           envFrom:

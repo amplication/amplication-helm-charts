@@ -29,9 +29,14 @@ podAnnotations: {}
 podSecurityContext:
 securityContext:
 
+containerPort: 3333
+
 service:
   type: ClusterIP
-  port: 3333
+  port:
+    http: 80
+    https: 443
+
 
 healthCheck:
   enabled: true
