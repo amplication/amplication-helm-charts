@@ -22,3 +22,9 @@ version: 1.0.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "0.0.0"
+
+dependencies:
+  - name: gateway
+    alias: istio-ingress-gateway
+    version: 1.15.0
+    repository: https://istio-release.storage.googleapis.com/charts
