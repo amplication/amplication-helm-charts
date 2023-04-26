@@ -48,9 +48,13 @@ podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
 
+containerPort: 3005
+
 service:
   type: ClusterIP
-  port: 80
+  port:
+    http: 80
+    https: 443
 
 ingress:
   enabled: false
