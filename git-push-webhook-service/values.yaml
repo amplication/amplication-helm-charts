@@ -37,7 +37,6 @@ service:
     http: 80
     https: 443
 
-
 healthCheck:
   enabled: true
   readinessProbe:

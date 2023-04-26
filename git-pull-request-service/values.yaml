@@ -37,6 +37,10 @@ service:
     http: 80
     https: 443
 
+volumes:
+  - name: data-service-generator-main
+    mountPath: /amplication-data
+
 healthCheck:
   enabled: true
   readinessProbe:
