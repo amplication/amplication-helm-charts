@@ -31,7 +31,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-        - name: "{{ .Values.name }}-migrate"
+        - name: "{{ .Chart.Name }}-migrate"
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh"]
@@ -40,7 +40,7 @@ spec:
           - name: POSTGRESQL_URL
             valueFrom:
               secretKeyRef:
-                name: {{ .Values.name }}
+                name: {{ include "plugin-api.fullname" . }}
                 key: POSTGRESQL_URL
                 optional: false
       containers:
@@ -60,11 +60,11 @@ spec:
           envFrom:
           {{- if .Values.environmentVariables.configMap }}
           - configMapRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+              name: {{ include "plugin-api.fullname" . }}
           {{- end }}
           {{- if .Values.environmentVariables.secret }}
           - secretRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+              name: {{ include "plugin-api.fullname" . }}
           {{- end }}          
           {{- end }}
           env:

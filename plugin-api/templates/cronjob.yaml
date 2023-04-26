@@ -1,18 +1,19 @@
 {{- if .Values.cronJob.enabled }}
+{{- with .Values.cronJob }}
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "plugin-api.fullname" . }}
 spec:
-  schedule: "{{ .Values.cronJob.schedule }}"
-  successfulJobsHistoryLimit: {{ .Values.cronJob.history.successful }}
-  failedJobsHistoryLimit: {{ .Values.cronJob.history.failed }}
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
   jobTemplate:
     spec:
       backoffLimit: 4
       template:
         metadata:
-        {{- with .Values.cronJob.annotations }}
+        {{- with .annotations }}
         annotations:
           {{- toYaml . | nindent 10 }}
         {{- end }}
@@ -33,5 +34,5 @@ spec:
                   -H "Content-Type: application/json" \
                   -H "X-REQUEST-TYPE: GraphQL" \
                   -d '{{ .Values.cronJob.query }}' \
-                  https://{{ .Values.istio.hostname }}/graphql
+                  https://{{ $.Values.istio.hostname }}/graphql
 {{- end }}
