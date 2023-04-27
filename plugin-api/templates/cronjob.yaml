@@ -1,0 +1,39 @@
+{{- if .Values.cronJob.enabled }}
+{{- with .Values.cronJob }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "plugin-api.fullname" $ }}
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+        {{- with .annotations }}
+        annotations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        spec:
+          serviceAccountName: {{ include "plugin-api.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: {{ $.Chart.Name }}-cronjob
+              imagePullPolicy: IfNotPresent
+              image: curlimages/curl:7.87.0
+              command:
+                - /bin/sh
+                - -c
+              args:
+                - |
+                  curl -X POST \
+                  -H "Content-Type: application/json" \
+                  -H "X-REQUEST-TYPE: GraphQL" \
+                  -d '{{ .query }}' \
+                  https://{{ $.Values.istio.hostname }}/graphql
+{{- end }}
+{{- end }}

@@ -16,9 +16,9 @@ spec:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
-        {{- if .Values.environmentVariables.configMap }}
+      {{- end }}
+      {{- if .Values.environmentVariables.configMap }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        {{- end }}
       {{- end }}
       labels:
         {{- include "client.selectorLabels" . | nindent 8 }}
@@ -38,15 +38,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.targetPort}}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
             - name: https
-              containerPort: {{ .Values.service.targetPort}}
+              containerPort: {{ .Values.service.port }}
               protocol: TCP
-          {{- if .Values.environmentVariables.configMap }}
+          {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
           envFrom:
+          {{- if .Values.environmentVariables.configMap }}
           - configMapRef:
-              name: {{ include "client.fullname" . }}
+              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- end }}
+          {{- if .Values.environmentVariables.secret }}
+          - secretRef:
+              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- end }}          
           {{- end }}
           env:
             - name: ENVIRONMENT
@@ -58,7 +64,7 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.healthCheck.readinessProbe.path }}
-              port: {{ .Values.healthCheck.readinessProbe.port }}
+              port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.healthCheck.readinessProbe.initialDelaySeconds | default 5 }}
             periodSeconds: {{ .Values.healthCheck.readinessProbe.periodSeconds | default 5 }}
           {{- end }}
@@ -66,7 +72,7 @@ spec:
           livenessProbe:
             httpGet:
               path: {{ .Values.healthCheck.livenessProbe.path }}
-              port: {{ .Values.healthCheck.livenessProbe.port }}
+              port: {{ .Values.service.port }}
             initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds | default 60 }}
             periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds | default 60 }}
           {{- end }}

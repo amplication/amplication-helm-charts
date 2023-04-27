@@ -1,6 +1,7 @@
 environment: sandbox
 
 istio:
+  enabled: true
   hostname: example.com
   gatewayName: main-gateway
 
@@ -11,7 +12,7 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 
-imagePullSecrets: {}
+imagePullSecrets: []
 
 environmentVariables:
   configMap: {}
@@ -22,11 +23,9 @@ healthCheck:
   readinessProbe:
     enabled: false
     path: /_health/ready
-    port: 3000
   livenessProbe:
     enabled: false
     path: /_health/live
-    port: 3000
 
 volumes:
   - name: amplication-data
@@ -34,7 +33,6 @@ volumes:
     claimName: efs-main-claim
 
 nameOverride: ""
-
 fullnameOverride: ""
 
 serviceAccount:
@@ -48,7 +46,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  targetPort: 3000
+  port: 3000
 
 ingress:
   enabled: false
@@ -61,13 +59,7 @@ ingress:
           pathType: ImplementationSpecific
   tls: []
 
-resources:
-  limits:
-    cpu: 1
-    memory: 1Gi
-  requests:
-    cpu: 100m
-    memory: 128Mi
+resources: {}
 
 autoscaling:
   enabled: false
