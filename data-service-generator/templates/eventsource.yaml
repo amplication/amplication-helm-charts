@@ -1,0 +1,20 @@
+{{- if .Values.events.eventSource.enabled -}}
+{{- with .Values.events.eventSource }}
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: {{ .name }}
+  labels:
+    {{- include "data-service-generator.labels" $ | nindent 4 }}
+spec:
+  service:
+    ports:
+      - port: {{ .service.port }}
+        targetPort: {{ .service.port }}
+  webhook:
+    dsg:
+      port: {{ .service.port }}
+      endpoint: {{ .webhook.endpoint }}
+      method: {{ .webhook.method }}
+{{- end }}
+{{- end }}

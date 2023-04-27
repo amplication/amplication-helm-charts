@@ -1,82 +1,70 @@
-# Default values for data-service-generator.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+environment: sandbox
 
-replicaCount: 1
-
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
-
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+image:
+  repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/data-service-generator
+  pullPolicy: Always
+  tag: ""
+
+imagePullSecrets: {}
+
+storage:
+  dataServiceGenerator:
+    enabled: true
+    suffix: dsg
+    storageClassName: efs-dsg-sc
+    persistentVolume:
+      volumeHandle: <path:environment-shared/data/efs/dsg/fs#volume_handle>
+    persistentVolumeClaim: {}
+  main:
+    enabled: true
+    suffix: main
+    storageClassName: efs-main-sc
+    persistentVolume:
+      volumeHandle: <path:environment-shared/data/efs/main/fs#volume_handle>
+    persistentVolumeClaim: {}
+
+events:
+  eventSource:
+    enabled: true
+    name: webhook
+    service:
+      port: 12000
+    webhook:
+      endpoint: /example
+      method: POST
+  eventBus:
+    enabled: true
+    name: default
+    native:
+      replicas: 3
+      auth: token
+  sensor:
+    enabled: true
+    name: dsg-job-webhook
+    templateName: dsg-job-webhook-trigger
+    generateName: dsg-job-
+    ttlSecondsAfterFinished: 600
+    variables:
+      buildManagerUrl: http://build-manager
+      remoteEnv: true
+      buildSpecPath: /efs/input.json
+      buildOutputPath: /efs/code
+
+volumes:
+  - name: data-service-generator-dsg-volume
+    mountPath: /efs
+
 serviceAccount:
-  # Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
+nodeSelector:
+  role: dsg
 
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 80
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+tolerations:
+  - key: dedicated
+    value: dsg
