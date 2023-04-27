@@ -1,82 +1,51 @@
-# Default values for miscellaneous.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+namespace: 
+  names:
+    - sandbox
+    - sandbox-dsg
+  labels:
+    istio-injection: enabled
 
-replicaCount: 1
+istio-ingress-gateway:
+  replicaCount: 2
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+      service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: ELBSecurityPolicy-TLS-1-2-2017-01
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <path:sandbox-shared/data/acm/primary#arn>
+      external-dns.alpha.kubernetes.io/hostname: "app.amplication-sandbox.com,server.amplication-sandbox.com,webhooks.amplication-sandbox.com,plugin-api.amplication-sandbox.com"
 
-image:
-  repository: nginx
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+gateway:
+  name: main-gateway
+  namespace: istio-system
+  domain: amplication-sandbox.com
+  hosts:
+    - app.amplication-sandbox.com
+    - server.amplication-sandbox.com
+    - webhooks.amplication-sandbox.com
+    - plugin-api.amplication-sandbox.com
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+imagePullSecretSetup:
+  enabled: true
+  cronJob:
+    schedule: "*/10 * * * *"
+    history:
+      successful: 2
+      failed: 2
+    annotations:
+      sidecar.istio.io/inject: "false"
+  secret:
+    secretAccessKey: <path:operations-shared/data/aws/credentials#secret-access-key>
+    accessKeyId: <path:operations-shared/data/aws/credentials#access-key-id>
+    account: <path:operations-shared/data/aws/account#id>
+    region: "us-east-1"
 
 serviceAccount:
-  # Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-podAnnotations: {}
-
-podSecurityContext: {}
-  # fsGroup: 2000
-
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
-
-service:
-  type: ClusterIP
-  port: 80
-
-ingress:
-  enabled: false
-  className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+rbac:
+  enabled: true
+  
+annotations: {}

@@ -1,0 +1,49 @@
+{{- if .Values.imagePullSecretSetup.enabled }}
+{{- range .Values.namespace.names }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg
+  namespace: {{ . }}
+  labels:
+    {{- include "miscellaneous.labels" $ | nindent 4 }}
+spec:
+  schedule: "{{ $.Values.imagePullSecretSetup.cronJob.schedule }}"
+  successfulJobsHistoryLimit: {{ $.Values.imagePullSecretSetup.cronJob.history.successful }}
+  failedJobsHistoryLimit: {{ $.Values.imagePullSecretSetup.cronJob.history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+          {{- with $.Values.imagePullSecretSetup.cronJob.annotations }}
+          annotations:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+        spec:
+          serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: kubectl
+              imagePullPolicy: IfNotPresent
+              image: xynova/aws-kubectl:latest
+              envFrom:
+                - secretRef:
+                    name: {{ include "miscellaneous.fullname" $ }}-ecr-secret
+              command:
+              - "/bin/sh"
+              - "-c"
+              - |
+                DOCKER_REGISTRY_SERVER=https://${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
+                DOCKER_USER=AWS
+                DOCKER_PASSWORD=$(aws ecr get-login --region ${AWS_REGION} --registry-ids ${AWS_ACCOUNT} | cut -d' ' -f6)
+                kubectl delete secret {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg || true
+                kubectl create secret docker-registry {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg \
+                  --docker-server=$DOCKER_REGISTRY_SERVER \
+                  --docker-username=$DOCKER_USER \
+                  --docker-password=$DOCKER_PASSWORD \
+                  --docker-email=no@email.local \
+                  --namespace={{ . }}
+{{- end }}
+{{- end }}
