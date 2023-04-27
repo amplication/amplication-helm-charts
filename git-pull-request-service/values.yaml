@@ -29,9 +29,17 @@ podAnnotations: {}
 podSecurityContext:
 securityContext:
 
+containerPort: 3333
+
 service:
   type: ClusterIP
-  port: 3333
+  port:
+    http: 80
+    https: 443
+
+volumes:
+  - name: data-service-generator-main
+    mountPath: /amplication-data
 
 healthCheck:
   enabled: true
