@@ -1,9 +1,0 @@
-{{- if .Values.environmentVariables.configMap }}
-apiVersion: v1
-kind: ConfigMap
-  name: {{ include "git-pull-service.fullname" . }}
-  labels:
-    {{- include "git-pull-service.labels" . | nindent 4 }}
-data: 
-  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
-{{- end }}

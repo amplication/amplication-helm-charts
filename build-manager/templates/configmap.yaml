@@ -1,9 +1,0 @@
-{{- if .Values.environmentVariables.configMap }}
-apiVersion: v1
-kind: ConfigMap
-  name: {{ include "build-manager.fullname" . }}
-  labels:
-    {{- include "build-manager.labels" . | nindent 4 }}
-data: 
-  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
-{{- end }}
