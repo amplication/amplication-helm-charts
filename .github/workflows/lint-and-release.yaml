@@ -1,0 +1,58 @@
+name: lint and release helm charts
+run-name: lint and release helm charts by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+  pull_request: 
+    types:
+      - closed
+
+jobs:
+  lint:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: set up helm 🔧
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.11.2
+
+      - name: setup python 🔧
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          check-latest: true
+
+      - name: configure git (package metadata) 🔧
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: set up chart-testing 🔧
+        uses: helm/chart-testing-action@v2.4.0
+
+      - name: run chart-testing (list-changed) 📦
+        id: list-changed
+        run: |
+          changed=$(ct list-changed --config ./.github/workflows/configuration/helm.yaml --target-branch ${{ github.event.repository.default_branch }})
+          if [[ -n "$changed" ]]; then
+              echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: run chart-testing (lint) 📦
+        if: steps.list-changed.outputs.changed == 'true'
+        run: ct lint --config ./.github/workflows/configuration/helm.yaml --target-branch ${{ github.event.repository.default_branch }}
+      
+      - name: run chart-releaser 📦
+        uses: helm/chart-releaser-action@v1.5.0
+        with:
+          charts_dir: ./
+          config: ./.github/workflows/configuration/helm.yaml
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
