@@ -116,14 +116,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-1.0.0/storage-gateway-1.0.0.tgz
     version: 1.0.0
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-05-02T07:33:02.916801015Z"
-    description: A Helm chart for Kubernetes
-    digest: 0dce94f3e67d27ea48225709a2aeb4a49ee240e986b90dc0105cf97c10549016
-    name: storage-gateway
-    type: application
-    urls:
-    - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-0.1.0/storage-gateway-0.1.0.tgz
-    version: 0.1.0
 generated: "2023-05-02T07:36:53.302279927Z"
