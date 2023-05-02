@@ -1,0 +1,119 @@
+apiVersion: v1
+entries:
+  build-manager:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:01.419677754Z"
+    description: A Helm chart for the build-manager component of Amplication
+    digest: fedd17e4cb341f9954a6fcc3585ae7a3fbf8d4a52c1a915c26b6cc7c09b79ecb
+    name: build-manager
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/build-manager-1.0.0/build-manager-1.0.0.tgz
+    version: 1.0.0
+  client:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:01.595185876Z"
+    description: A Helm chart for the client component of Amplication
+    digest: 1c0cf2ac74a8951216f805b24fc50cc80ef9068b511719da8447de662c7c2e0b
+    name: client
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/client-1.0.0/client-1.0.0.tgz
+    version: 1.0.0
+  data-service-generator:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:01.735200296Z"
+    description: A Helm chart for the data-service-generator component of Amplication
+    digest: d413f74fa11a471405c507e784c3ea7dd8d416e146ba50c9d02388fac330a2ee
+    name: data-service-generator
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/data-service-generator-1.0.0/data-service-generator-1.0.0.tgz
+    version: 1.0.0
+  git-pull-request-service:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:01.902582464Z"
+    description: A Helm chart for the git-pull-request-service component of Amplication
+    digest: 1ab77def9ec95e74300158d9db449bbf13f1702a45f5fe53048ee43c4e5a2517
+    name: git-pull-request-service
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-pull-request-service-1.0.0/git-pull-request-service-1.0.0.tgz
+    version: 1.0.0
+  git-pull-service:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:02.080177175Z"
+    description: A Helm chart for the git-pull-service component of Amplication
+    digest: bf23b411dca5ae223b21f2fd93867bca3f6a48c15a267d5e745445fa3fa679b6
+    name: git-pull-service
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-pull-service-1.0.0/git-pull-service-1.0.0.tgz
+    version: 1.0.0
+  git-push-webhook-service:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:02.309737596Z"
+    description: A Helm chart for the git-push-webhook-service component of Amplication
+    digest: edbe3830652555804a199c88d79bb489a38388b12d75eb4d12a66c204906a7c3
+    name: git-push-webhook-service
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-push-webhook-service-1.0.0/git-push-webhook-service-1.0.0.tgz
+    version: 1.0.0
+  miscellaneous:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:02.456168381Z"
+    dependencies:
+    - alias: istio-ingress-gateway
+      name: gateway
+      repository: https://istio-release.storage.googleapis.com/charts
+      version: 1.15.0
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: 6bcef063e66643856a868d499c67b58654c5922f619c01c393a869aee8c48d90
+    name: miscellaneous
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-1.0.0/miscellaneous-1.0.0.tgz
+    version: 1.0.0
+  plugin-api:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:02.593727115Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: dbf5b4abfc70332a901c5208aea59b4451e645f082166fe632061364551342e7
+    name: plugin-api
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-1.0.0/plugin-api-1.0.0.tgz
+    version: 1.0.0
+  server:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-05-02T07:33:02.765953755Z"
+    description: A Helm chart for the server component of Amplication
+    digest: a67b1a4a4114686fc344b14da77126411a9c7690d81098da0f480dbf9a2188ed
+    name: server
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/server-1.0.0/server-1.0.0.tgz
+    version: 1.0.0
+  storage-gateway:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-05-02T07:33:02.916801015Z"
+    description: A Helm chart for Kubernetes
+    digest: 0dce94f3e67d27ea48225709a2aeb4a49ee240e986b90dc0105cf97c10549016
+    name: storage-gateway
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-0.1.0/storage-gateway-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-05-02T07:33:02.916806415Z"
