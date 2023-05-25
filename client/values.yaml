@@ -1,5 +1,3 @@
-environment: sandbox
-
 replicaCount: 1
 
 image:
@@ -13,7 +11,7 @@ environmentVariables:
   configMap: {}
 
 healthCheck:
-  enabled: true
+  enabled: false
   readinessProbe:
     enabled: false
     path: /_health/ready
@@ -33,9 +31,13 @@ podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
 
+containerPort: 8080
+
 service:
   type: ClusterIP
-  targetPort: 8080
+  port:
+    http: 80
+    https: 443
 
 ingress:
   enabled: false

@@ -1,5 +1,3 @@
-environment: sandbox
-
 replicaCount: 1
 
 image:

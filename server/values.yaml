@@ -1,5 +1,3 @@
-environment: sandbox
-
 replicaCount: 1
 
 image:
@@ -39,9 +37,13 @@ podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
 
+containerPort: 3000
+
 service:
   type: ClusterIP
-  port: 3000
+  port:
+    http: 80
+    https: 443
 
 ingress:
   enabled: false
