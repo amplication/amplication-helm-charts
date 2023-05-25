@@ -8,7 +8,7 @@
 
 ## Parameters
 
-### generated-service-admin console parameters
+### generated-service-admin parameters
 
 These parameters only apply to the generated-service-admin component.
 

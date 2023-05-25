@@ -8,7 +8,7 @@
 
 ## Parameters
 
-### website console parameters
+### website parameters
 
 These parameters only apply to the website component.
 

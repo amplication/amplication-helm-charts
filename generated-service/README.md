@@ -8,7 +8,7 @@
 
 ## Parameters
 
-### generated-service console parameters
+### generated-service parameters
 
 These parameters only apply to the generated-service component.
 
