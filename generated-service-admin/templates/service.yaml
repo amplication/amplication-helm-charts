@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "generated-service-admin.fullname" . }}
+  labels:
+    {{- include "generated-service-admin.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port.http }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    - port: {{ .Values.service.port.https }}
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    {{- include "generated-service-admin.selectorLabels" . | nindent 4 }}

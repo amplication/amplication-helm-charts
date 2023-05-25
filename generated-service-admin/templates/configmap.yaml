@@ -1,0 +1,9 @@
+{{- if .Values.environmentVariables.configMap }}
+apiVersion: v1
+kind: ConfigMap
+  name: {{ include "generated-service-admin.fullname" . }}
+  labels:
+    {{- include "generated-service-admin.labels" . | nindent 4 }}
+data: 
+  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
+{{- end }}
