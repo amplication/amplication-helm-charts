@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "generated-service.fullname" . }}
+  labels:
+    {{- include "generated-service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "generated-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.environmentVariables.configMap }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
+      labels:
+        {{- include "generated-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "generated-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+            - name: https
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
+          envFrom:
+          {{- if .Values.environmentVariables.configMap }}
+          - configMapRef:
+              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- end }}
+          {{- if .Values.environmentVariables.secret }}
+          - secretRef:
+              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- end }}          
+          {{- end }}
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          {{- if .Values.healthCheck.enabled }}
+          {{- if .Values.healthCheck.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthCheck.readinessProbe.path }}
+              port: {{ .Values.service.port.http }}
+            initialDelaySeconds: {{ .Values.healthCheck.readinessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.healthCheck.readinessProbe.periodSeconds | default 5 }}
+          {{- end }}
+          {{- if .Values.healthCheck.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthCheck.livenessProbe.path }}
+              port: {{ .Values.service.port.http }}
+            initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds | default 60 }}
+            periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds | default 60 }}
+          {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
