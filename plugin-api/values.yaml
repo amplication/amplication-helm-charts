@@ -1,9 +1,5 @@
 environment: sandbox
 
-istio:
-  hostname: example.com
-  gatewayName: main-gateway
-
 replicaCount: 1
 
 image:
