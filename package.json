@@ -1,0 +1,27 @@
+{
+    "name": "amplication-helm-charts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "readme:build-manager": "readme-generator --values build-manager/values.yaml --readme build-manager/README.md --schema build-manager/schema.json",
+      "readme:client": "readme-generator --values client/values.yaml --readme client/README.md --schema client/schema.json",
+      "readme:data-service-generator": "readme-generator --values data-service-generator/values.yaml --readme data-service-generator/README.md --schema data-service-generator/schema.json",
+      "readme:generated-service": "readme-generator --values generated-service/values.yaml --readme generated-service/README.md --schema generated-service/schema.json",
+      "readme:generated-service-admin": "readme-generator --values generated-service-admin/values.yaml --readme generated-service-admin/README.md --schema generated-service-admin/schema.json",
+      "readme:git-pull-request-service": "readme-generator --values git-pull-request-service/values.yaml --readme git-pull-request-service/README.md --schema git-pull-request-service/schema.json",
+      "readme:git-pull-service": "readme-generator --values git-pull-service/values.yaml --readme git-pull-service/README.md --schema git-pull-service/schema.json",
+      "readme:git-push-webhook-service": "readme-generator --values git-push-webhook-service/values.yaml --readme git-push-webhook-service/README.md --schema git-push-webhook-service/schema.json",
+      "readme:miscellaneous": "readme-generator --values miscellaneous/values.yaml --readme miscellaneous/README.md --schema miscellaneous/schema.json",
+      "readme:plugin-api": "readme-generator --values plugin-api/values.yaml --readme plugin-api/README.md --schema plugin-api/schema.json",
+      "readme:server": "readme-generator --values server/values.yaml --readme server/README.md --schema server/schema.json",
+      "readme:storage-gateway": "readme-generator --values storage-gateway/values.yaml --readme storage-gateway/README.md --schema storage-gateway/schema.json",
+      "readme:website": "readme-generator --values website/values.yaml --readme website/README.md --schema website/schema.json"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@bitnami/readme-generator-for-helm": "2.5.0"
+    }
+}
