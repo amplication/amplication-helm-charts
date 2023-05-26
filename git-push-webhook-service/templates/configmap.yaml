@@ -1,9 +1,10 @@
-{{- if .Values.environmentVariables.configmap }}
+{{- if .Values.variables.configmap }}
 apiVersion: v1
 kind: ConfigMap
-  name: {{ include "git-push-webhook-service.fullname" . }}
+metadata:
+  name: {{ include "git-push-webhook-service.fullname" . }}-variables
   labels:
     {{- include "git-push-webhook-service.labels" . | nindent 4 }}
 data: 
-  {{- toYaml .Values.environmentVariables.configmap | nindent 2 }}
+  {{- toYaml .Values.variables.configmap | nindent 2 }}
 {{- end }}

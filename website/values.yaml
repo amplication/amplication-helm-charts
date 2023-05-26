@@ -24,10 +24,10 @@ image:
 ##
 imagePullSecrets: []
 
-## @param environmentVariables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
-## @param environmentVariables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
+## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
+## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
 ##
-environmentVariables:
+variables:
   configmap: {}
   secret: {}
 

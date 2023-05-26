@@ -1,9 +1,10 @@
-{{- if .Values.environmentVariables.configmap }}
+{{- if .Values.variables.configmap }}
 apiVersion: v1
 kind: ConfigMap
-  name: {{ include "build-manager.fullname" . }}
+metadata:
+  name: {{ include "build-manager.fullname" . }}-variables
   labels:
     {{- include "build-manager.labels" . | nindent 4 }}
 data: 
-  {{- toYaml .Values.environmentVariables.configmap | nindent 2 }}
+  {{- toYaml .Values.variables.configmap | nindent 2 }}
 {{- end }}

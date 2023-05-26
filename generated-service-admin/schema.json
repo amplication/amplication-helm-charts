@@ -33,7 +33,7 @@
             "default": [],
             "items": {}
         },
-        "environmentVariables": {
+        "variables": {
             "type": "object",
             "properties": {
                 "configmap": {

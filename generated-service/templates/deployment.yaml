@@ -17,7 +17,7 @@ spec:
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.environmentVariables.configmap }}
+      {{- if .Values.variables.configmap }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
       {{- end }}
       labels:
@@ -43,15 +43,15 @@ spec:
             - name: https
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- if or .Values.environmentVariables.configmap .Values.environmentVariables.secret }}
+          {{- if or .Values.variables.configmap .Values.variables.secret }}
           envFrom:
-          {{- if .Values.environmentVariables.configmap }}
+          {{- if .Values.variables.configmap }}
           - configMapRef:
-              name: {{ include "generated-service.fullname" . }}
+              name: {{ include "generated-service.fullname" . }}-variables
           {{- end }}
-          {{- if .Values.environmentVariables.secret }}
+          {{- if .Values.variables.secret }}
           - secretRef:
-              name: {{ include "generated-service.fullname" . }}
+              name: {{ include "generated-service.fullname" . }}-variables
           {{- end }}          
           {{- end }}
           env:
