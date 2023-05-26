@@ -47,11 +47,11 @@ spec:
           envFrom:
           {{- if .Values.environmentVariables.configmap }}
           - configMapRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+              name: {{ include "generated-service.fullname" . }}
           {{- end }}
           {{- if .Values.environmentVariables.secret }}
           - secretRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+              name: {{ include "generated-service.fullname" . }}
           {{- end }}          
           {{- end }}
           env:
