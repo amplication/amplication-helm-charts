@@ -1,4 +1,4 @@
-{{- if .Values.environmentVariables.configMap }}
+{{- if .Values.environmentVariables.configmap }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,5 +6,5 @@ metadata:
   labels:
     {{- include "plugin-api.labels" . | nindent 4 }}
 data: 
-  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
+  {{- toYaml .Values.environmentVariables.configmap | nindent 2 }}
 {{- end }}

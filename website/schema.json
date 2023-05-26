@@ -36,7 +36,7 @@
         "environmentVariables": {
             "type": "object",
             "properties": {
-                "configMap": {
+                "configmap": {
                     "type": "object",
                     "description": "A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)",
                     "default": {}

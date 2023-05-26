@@ -24,11 +24,11 @@ image:
 ##
 imagePullSecrets: []
 
-## @param environmentVariables.configMap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
+## @param environmentVariables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
 ## @param environmentVariables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
 ##
 environmentVariables:
-  configMap: {}
+  configmap: {}
   secret: {}
 
 ## @param healthCheck.enabled Whether to enable the healthcheck on the deployment

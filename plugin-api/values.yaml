@@ -8,7 +8,7 @@ image:
 imagePullSecrets: []
 
 environmentVariables:
-  configMap: {}
+  configmap: {}
   secret: {}
 
 cronJob:

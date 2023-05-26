@@ -17,7 +17,7 @@ spec:
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.environmentVariables.configMap }}
+      {{- if .Values.environmentVariables.configmap }}
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
       {{- end }}
       labels:
@@ -43,9 +43,9 @@ spec:
             - name: https
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
+          {{- if or .Values.environmentVariables.configmap .Values.environmentVariables.secret }}
           envFrom:
-          {{- if .Values.environmentVariables.configMap }}
+          {{- if .Values.environmentVariables.configmap }}
           - configMapRef:
               name: {{ include "git-pull-request-service.fullname" . }}
           {{- end }}
