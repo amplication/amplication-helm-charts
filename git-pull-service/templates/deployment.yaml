@@ -13,12 +13,14 @@ spec:
       {{- include "git-pull-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.variables.configmap }}
       annotations:
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .Values.variables.configmap }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config: {{ tpl ( .Files.Get "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
       {{- end }}
       labels:
         {{- include "git-pull-service.selectorLabels" . | nindent 8 }}
