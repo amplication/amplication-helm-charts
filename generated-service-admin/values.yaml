@@ -102,6 +102,7 @@ securityContext: {}
 ## @param ingress.annotations Annotations to add on the ingress object
 ## @param ingress.hosts Hosts configuration for ingress object
 ## @param ingress.tls TLS configuration for ingress object
+##
 ingress:
   enabled: false
   className: ""
