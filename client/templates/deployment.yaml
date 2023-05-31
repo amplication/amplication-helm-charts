@@ -42,14 +42,11 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-            - name: https
-              containerPort: {{ .Values.containerPort }}
-              protocol: TCP
           {{- if or .Values.variables.configmap }}
           envFrom:
           {{- if .Values.variables.configmap }}
-          - configMapRef:
-              name: {{ include "client.fullname" . }}-variables
+            - configMapRef:
+                name: {{ include "client.fullname" . }}-variables
           {{- end }}        
           {{- end }}
           env:

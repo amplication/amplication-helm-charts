@@ -7,9 +7,13 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .Values.service.port.http }}
+      targetPort: {{ .Values.containerPort }}
       protocol: TCP
       name: http
+    - port: {{ .Values.service.port.https }}
+      targetPort: {{ .Values.containerPort }}
+      protocol: TCP
+      name: https
   selector:
     {{- include "server.selectorLabels" . | nindent 4 }}

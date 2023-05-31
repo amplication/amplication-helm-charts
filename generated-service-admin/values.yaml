@@ -46,7 +46,7 @@ healthCheck:
 
 ## @param containerPort The port number which is exposed on the container image
 ##
-containerPort: 3001
+containerPort: 80
 
 ## @param service.type The kubernetes service type to be used
 ## @param service.port.http The port exposed on the service to be used for http traffic

@@ -42,18 +42,15 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-            - name: https
-              containerPort: {{ .Values.containerPort }}
-              protocol: TCP
           {{- if or .Values.variables.configmap .Values.variables.secret }}
           envFrom:
           {{- if .Values.variables.configmap }}
-          - configMapRef:
-              name: {{ include "git-pull-service.fullname" . }}-variables
+            - configMapRef:
+                name: {{ include "git-pull-service.fullname" . }}-variables
           {{- end }}
           {{- if .Values.variables.secret }}
-          - secretRef:
-              name: {{ include "git-pull-service.fullname" . }}-variables
+            - secretRef:
+                name: {{ include "git-pull-service.fullname" . }}-variables
           {{- end }}          
           {{- end }}
           env:
