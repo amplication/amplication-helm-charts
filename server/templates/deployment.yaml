@@ -13,12 +13,14 @@ spec:
       {{- include "server.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.variables.configmap }}
       annotations:
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.environmentVariables.configMap }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }} 
+      {{- if .Values.variables.configmap }}
+        checksum/config: {{ tpl ( .Files.Get "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
       {{- end }}
       labels:
         {{- include "server.selectorLabels" . | nindent 8 }}
@@ -37,12 +39,12 @@ spec:
           command: ["/bin/sh"]
           args: ["-c", "npx prisma migrate deploy --schema prisma/schema.prisma", ";", "exit"]
           env:
-          - name: POSTGRESQL_URL
-            valueFrom:
-              secretKeyRef:
-                name: {{ include "server.fullname" . }}
-                key: POSTGRESQL_URL
-                optional: false
+            - name: POSTGRESQL_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "server.fullname" . }}
+                  key: POSTGRESQL_URL
+                  optional: false
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -51,20 +53,17 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.containerPort }}
               protocol: TCP
-            - name: https
-              containerPort: {{ .Values.service.port }}
-              protocol: TCP
-          {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
+          {{- if or .Values.variables.configmap .Values.variables.secret }}
           envFrom:
-          {{- if .Values.environmentVariables.configMap }}
-          - configMapRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- if .Values.variables.configmap }}
+            - configMapRef:
+                name: {{ include "server.fullname" . }}-variables
           {{- end }}
-          {{- if .Values.environmentVariables.secret }}
-          - secretRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- if .Values.variables.secret }}
+            - secretRef:
+                name: {{ include "server.fullname" . }}-variables
           {{- end }}          
           {{- end }}
           env:

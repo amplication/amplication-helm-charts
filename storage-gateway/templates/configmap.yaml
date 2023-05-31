@@ -1,9 +1,10 @@
-{{- if .Values.environmentVariables.configMap }}
+{{- if .Values.variables.configmap }}
 apiVersion: v1
 kind: ConfigMap
-  name: {{ include "storage-gateway.fullname" . }}
+metadata:
+  name: {{ include "storage-gateway.fullname" . }}-variables
   labels:
     {{- include "storage-gateway.labels" . | nindent 4 }}
 data: 
-  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
+  {{- toYaml .Values.variables.configmap | nindent 2 }}
 {{- end }}

@@ -1,9 +1,3 @@
-environment: sandbox
-
-istio:
-  hostname: example.com
-  gatewayName: main-gateway
-
 replicaCount: 1
 
 image:
@@ -13,8 +7,8 @@ image:
 
 imagePullSecrets: []
 
-environmentVariables:
-  configMap: {}
+variables:
+  configmap: {}
   secret: {}
 
 volumes:
@@ -44,7 +38,7 @@ service:
     https: 443
 
 healthCheck:
-  enabled: true
+  enabled: false
   readinessProbe:
     enabled: false
     path: /_health/ready

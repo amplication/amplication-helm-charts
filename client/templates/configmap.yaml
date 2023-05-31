@@ -1,9 +1,10 @@
-{{- if .Values.environmentVariables.configMap }}
+{{- if .Values.variables.configmap }}
 apiVersion: v1
 kind: ConfigMap
-  name: {{ include "client.fullname" . }}
+metadata:
+  name: {{ include "client.fullname" . }}-variables
   labels:
     {{- include "client.labels" . | nindent 4 }}
 data: 
-  {{- toYaml .Values.environmentVariables.configMap | nindent 2 }}
+  {{- toYaml .Values.variables.configmap | nindent 2 }}
 {{- end }}

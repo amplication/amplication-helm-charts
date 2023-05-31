@@ -13,12 +13,14 @@ spec:
       {{- include "git-pull-request-service.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
+      {{- if or .Values.podAnnotations .Values.variables.configmap }}
       annotations:
+      {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .Values.environmentVariables.configMap }}
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- if .Values.variables.configmap }}
+        checksum/config: {{ tpl ( .Files.Get "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
       {{- end }}
       labels:
         {{- include "git-pull-request-service.selectorLabels" . | nindent 8 }}
@@ -40,18 +42,15 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-            - name: https
-              containerPort: {{ .Values.containerPort }}
-              protocol: TCP
-          {{- if or .Values.environmentVariables.configMap .Values.environmentVariables.secret }}
+          {{- if or .Values.variables.configmap .Values.variables.secret }}
           envFrom:
-          {{- if .Values.environmentVariables.configMap }}
-          - configMapRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- if .Values.variables.configmap }}
+            - configMapRef:
+                name: {{ include "git-pull-request-service.fullname" . }}-variables
           {{- end }}
-          {{- if .Values.environmentVariables.secret }}
-          - secretRef:
-              name: {{ include "git-pull-request-service.fullname" . }}
+          {{- if .Values.variables.secret }}
+            - secretRef:
+                name: {{ include "git-pull-request-service.fullname" . }}-variables
           {{- end }}          
           {{- end }}
           env:

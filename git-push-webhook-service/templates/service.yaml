@@ -7,11 +7,11 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port.http }}
-      targetPort: http
+      targetPort: {{ .Values.containerPort }}
       protocol: TCP
       name: http
     - port: {{ .Values.service.port.https }}
-      targetPort: https
+      targetPort: {{ .Values.containerPort }}
       protocol: TCP
       name: https
   selector:

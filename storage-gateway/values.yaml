@@ -1,10 +1,3 @@
-environment: sandbox
-
-istio:
-  enabled: true
-  hostname: example.com
-  gatewayName: main-gateway
-
 replicaCount: 1
 
 image:
@@ -14,8 +7,8 @@ image:
 
 imagePullSecrets: []
 
-environmentVariables:
-  configMap: {}
+variables:
+  configmap: {}
   secret: {}
 
 healthCheck:
