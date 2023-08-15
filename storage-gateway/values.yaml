@@ -7,9 +7,19 @@ image:
 
 imagePullSecrets: []
 
+## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
+## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
+## @param variables.externalSecret A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)
+## @param variables.secretStoreConfiguration When using external secrets this part of the configuration is used to point to the secret store or cluster secret store
+##
 variables:
   configmap: {}
   secret: {}
+  externalSecret: {}
+  secretStoreConfiguration:
+    kind: ClusterSecretStore
+    name: ""
+    enabled: false
 
 healthCheck:
   enabled: true

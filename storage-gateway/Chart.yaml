@@ -3,7 +3,7 @@ name: storage-gateway
 description: A Helm chart for the storage-gateway component of Amplication
 
 type: application
-version: 1.0.0
+version: 1.1.0
 appVersion: "0.0.0"
 
 sources:

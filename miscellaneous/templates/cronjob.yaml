@@ -45,5 +45,6 @@ spec:
                   --docker-password=$DOCKER_PASSWORD \
                   --docker-email=no@email.local \
                   --namespace={{ . }}
+---
 {{- end }}
 {{- end }}
