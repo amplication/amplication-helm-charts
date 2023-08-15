@@ -63,7 +63,7 @@ spec:
                             mountPath: "/efs"
                             subPathExpr: $(BUILD_ID)
                         resources:
-                          {{- toYaml .Values.sensor.resources | nindent 26 }}
+                          {{- toYaml .Values.events.sensor.resources | nindent 26 }}
                     volumes:
                       - name: {{ include "data-service-generator.fullname" . }}-{{ .Values.storage.dataServiceGenerator.suffix }}-volume
                         persistentVolumeClaim:
