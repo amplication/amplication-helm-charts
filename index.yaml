@@ -30,6 +30,22 @@ entries:
   client:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-15T14:25:48.79919513Z"
+    description: A Helm chart for the client component of Amplication
+    digest: 891c9064ecc2d442e897859171009b8af40b31f452f19cdc235139f92f48940a
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: client
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/client-1.1.1/client-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-15T09:55:28.710411254Z"
     description: A Helm chart for the client component of Amplication
     digest: d8eb3ae78da97d346b895a4180a6d0d00a4f386fcb8f693b488badb977256095
@@ -55,6 +71,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/client-1.0.0/client-1.0.0.tgz
     version: 1.0.0
   data-service-generator:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-15T14:25:48.930205795Z"
+    description: A Helm chart for the data-service-generator component of Amplication
+    digest: 4ab56b9e0df3ba39bcb1248bdb48728b67d37258c6ce56160a34c851a05ee01a
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: data-service-generator
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/data-service-generator-1.1.1/data-service-generator-1.1.1.tgz
+    version: 1.1.1
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-15T09:55:28.908290384Z"
@@ -333,4 +365,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-15T09:55:31.099774363Z"
+generated: "2023-08-15T14:25:48.930252995Z"
