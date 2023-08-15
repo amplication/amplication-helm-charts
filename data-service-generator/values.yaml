@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
   tag: ""
 
-imagePullSecrets: {}
+imagePullSecrets: []
 
 ## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
 ## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
@@ -28,15 +28,13 @@ storage:
     suffix: dsg
     storageClassName: efs-dsg-sc
     persistentVolume:
-      volumeHandle: <path:environment-shared/data/efs/dsg/fs#volume_handle>
-    persistentVolumeClaim: {}
+      volumeHandle: <volume_handle>
   main:
     enabled: true
     suffix: main
     storageClassName: efs-main-sc
     persistentVolume:
-      volumeHandle: <path:environment-shared/data/efs/main/fs#volume_handle>
-    persistentVolumeClaim: {}
+      volumeHandle: <volume_handle>
 
 events:
   eventSource:
@@ -64,10 +62,13 @@ events:
       remoteEnv: true
       buildSpecPath: /efs/input.json
       buildOutputPath: /efs/code
-
-volumes:
-  - name: data-service-generator-dsg-volume
-    mountPath: /efs
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        cpu: 1200m
+        memory: 3000Mi
 
 serviceAccount:
   create: true

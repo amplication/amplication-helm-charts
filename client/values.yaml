@@ -5,7 +5,7 @@ image:
   pullPolicy: IfNotPresent
   tag: ""
 
-imagePullSecrets: {}
+imagePullSecrets: []
 
 ## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
 ## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
