@@ -32,19 +32,18 @@ imagePullSecretSetup:
     history:
       successful: 2
       failed: 2
-    annotations: {}
-      # sidecar.istio.io/inject: "false"
+    annotations:
+      sidecar.istio.io/inject: "false"
   variables:
     secret: {}
     externalSecret: {}
-      # AWS_SECRET_ACCESS_KEY: "/accounts/operations/secret-access-key"
-      # AWS_ACCESS_KEY_ID: "/accounts/operations/access-key-id"
-      # AWS_ACCOUNT: "/accounts/operations/id"
-      # REGION: "/accounts/operations/region"
     secretStoreConfiguration:
       kind: ClusterSecretStore
       name: ""
       enabled: false
+
+nameOverride: ""
+fullnameOverride: ""
 
 serviceAccount:
   create: true
