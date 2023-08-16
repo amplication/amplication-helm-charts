@@ -3,7 +3,7 @@ name: git-pull-service
 description: A Helm chart for the git-pull-service component of Amplication
 
 type: application
-version: 1.1.1
+version: 1.1.2
 appVersion: "0.0.0"
 
 sources:

@@ -55,7 +55,7 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- if or .Values.variables.configmap .Values.variables.secret }}
+          {{- if or .Values.variables.configmap .Values.variables.secret .Values.variables.externalSecret }}
           envFrom:
           {{- if .Values.variables.configmap }}
             - configMapRef:

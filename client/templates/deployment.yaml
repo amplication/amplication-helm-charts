@@ -42,12 +42,16 @@ spec:
             - name: http
               containerPort: {{ .Values.containerPort }}
               protocol: TCP
-          {{- if or .Values.variables.configmap }}
+          {{- if or .Values.variables.configmap .Values.variables.secret .Values.variables.externalSecret }}
           envFrom:
           {{- if .Values.variables.configmap }}
             - configMapRef:
                 name: {{ include "client.fullname" . }}-variables
-          {{- end }}        
+          {{- end }}
+          {{- if or .Values.variables.secret .Values.variables.externalSecret }}
+            - secretRef:
+                name: {{ include "client.fullname" . }}-variables
+          {{- end }}
           {{- end }}
           env:
             - name: ENVIRONMENT
