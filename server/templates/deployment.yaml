@@ -91,15 +91,19 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-      {{- if .Values.volumes }}
-      {{- range .Values.volumes }}
+          {{- if .Values.volumes }}
           volumeMounts:
-            - name: {{ .name }}
+          {{- range .Values.volumes }}
+            - name: {{ .name }}-volume
               mountPath: {{ .mountPath }}
+          {{- end }}
+          {{- end }}
+      {{- if .Values.volumes }}
       volumes:
-        - name:
+      {{- range .Values.volumes }}
+        - name: {{ .name }}-volume
           persistentVolumeClaim:
-            claimName: {{ .claimName }}
+            claimName: {{ .name }}-pvc
       {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}

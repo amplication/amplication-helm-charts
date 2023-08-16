@@ -31,7 +31,7 @@ healthCheck:
     path: /_health/live
 
 volumes:
-  - name: data-service-generator-main
+  - name: shared-main
     mountPath: /amplication-data
 
 nameOverride: ""

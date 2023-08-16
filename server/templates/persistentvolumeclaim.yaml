@@ -1,0 +1,19 @@
+{{- if .Values.storage.shared.enabled -}}
+{{- with .Values.storage.shared }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-{{ .suffix | default "main" }}-pvc
+  labels:
+    {{- include "server.labels" $ | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  volumeName: shared-{{ .suffix | default "main" }}-pv
+  storageClassName: {{ .storageClassName }}
+  volumeMode: Filesystem
+{{- end }}
+{{- end }}

@@ -21,6 +21,10 @@ variables:
     name: ""
     enabled: false
 
+volumes:
+  - name: shared-main
+    mountPath: /amplication-data
+
 nameOverride: ""
 fullnameOverride: ""
 

@@ -1,0 +1,35 @@
+{{- if .Values.storageClass.main.enabled -}}
+{{- with .Values.storageClass.main }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ .name }}
+provisioner: efs.csi.aws.com
+mountOptions:
+  - tls
+parameters:
+  provisioningMode: {{ .provisioningMode }}
+  fileSystemId: {{ .id }}
+  directoryPerms: {{ .directoryPerms }}
+  gidRangeStart: {{ .gidRangeStart }}
+  gidRangeEnd: {{ .gidRangeEnd }}
+{{- end }}
+{{- end }}
+---
+{{- if .Values.storageClass.main.enabled -}}
+{{- with .Values.storageClass.dsg }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ .name }}
+provisioner: efs.csi.aws.com
+mountOptions:
+  - tls
+parameters:
+  provisioningMode: {{ .provisioningMode }}
+  fileSystemId: {{ .id }}
+  directoryPerms: {{ .directoryPerms }}
+  gidRangeStart: {{ .gidRangeStart }}
+  gidRangeEnd: {{ .gidRangeEnd }}
+{{- end }}
+{{- end }}

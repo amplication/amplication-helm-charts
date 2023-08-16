@@ -30,10 +30,17 @@ healthCheck:
     enabled: false
     path: /_health/live
 
+storage:
+  shared:
+    enabled: true
+    suffix: main
+    storageClassName: efs-main-sc
+    persistentVolume:
+      volumeHandle: <volume_handle>
+
 volumes:
-  - name: amplication-data
+  - name: shared-main
     mountPath: /amplication-data
-    claimName: efs-main-claim
 
 nameOverride: ""
 fullnameOverride: ""
