@@ -262,6 +262,22 @@ entries:
   git-pull-request-service:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-16T11:47:22.856312928Z"
+    description: A Helm chart for the git-pull-request-service component of Amplication
+    digest: 8e5e10652c44eac62b73c6bf5f0606decb69ed323304034d95ebf222b847e448
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: git-pull-request-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-pull-request-service-1.1.3/git-pull-request-service-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-16T09:36:30.41138446Z"
     description: A Helm chart for the git-pull-request-service component of Amplication
     digest: bb88ba4ed09101c21f6a2b0b45d074ae82c10d1e9a30cb9612f1d39dbd893130
@@ -439,6 +455,28 @@ entries:
   miscellaneous:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-16T11:47:23.005000775Z"
+    dependencies:
+    - alias: istio-ingress-gateway
+      name: gateway
+      repository: https://istio-release.storage.googleapis.com/charts
+      version: 1.15.0
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: 44fec10adab7851c58b54e0f52ef5fc007c7fec0915b5ca8409a5db83d67eea9
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: miscellaneous
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-1.1.2/miscellaneous-1.1.2.tgz
+    version: 1.1.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-16T06:24:36.463242954Z"
     dependencies:
     - alias: istio-ingress-gateway
@@ -559,6 +597,22 @@ entries:
   server:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-16T11:47:23.125452096Z"
+    description: A Helm chart for the server component of Amplication
+    digest: 42517e511e757d5804dedd18bf5342f6a02e646f298471079d14a03b9e6d6dbd
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: server
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/server-1.1.3/server-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-16T09:36:30.944337377Z"
     description: A Helm chart for the server component of Amplication
     digest: ca688955af49134975fe341577dc5b413077896521d7e887d68f17f4c272fbc0
@@ -616,6 +670,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/server-1.0.0/server-1.0.0.tgz
     version: 1.0.0
   storage-gateway:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-16T11:47:23.291265703Z"
+    description: A Helm chart for the storage-gateway component of Amplication
+    digest: 0a5fd100e81c33faa3dfff77139472c75d3906174dee93ea5f3b16623933b4cd
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: storage-gateway
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-1.1.3/storage-gateway-1.1.3.tgz
+    version: 1.1.3
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-16T09:36:31.052352153Z"
@@ -723,4 +793,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-16T09:36:31.227230669Z"
+generated: "2023-08-16T11:47:23.291374304Z"
