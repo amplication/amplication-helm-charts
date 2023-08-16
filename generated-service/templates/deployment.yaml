@@ -61,7 +61,7 @@ spec:
             - configMapRef:
                 name: {{ include "generated-service.fullname" . }}-variables
           {{- end }}
-          {{- if .Values.variables.secret }}
+          {{- if or .Values.variables.secret .Values.variables.externalSecret }}
             - secretRef:
                 name: {{ include "generated-service.fullname" . }}-variables
           {{- end }}          

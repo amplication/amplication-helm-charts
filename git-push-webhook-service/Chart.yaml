@@ -3,7 +3,7 @@ name: git-push-webhook-service
 description: A Helm chart for the git-push-webhook-service component of Amplication
 
 type: application
-version: 1.1.0
+version: 1.1.1
 appVersion: "0.0.0"
 
 sources:
