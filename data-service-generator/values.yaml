@@ -1,11 +1,6 @@
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/data-service-generator
-  pullPolicy: Always
-  tag: ""
-
 imagePullSecrets: []
 
 ## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
@@ -52,11 +47,18 @@ events:
       replicas: 3
       auth: token
   sensor:
+    image:
+      repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/data-service-generator
+      pullPolicy: Always
+      tag: ""
     enabled: true
     name: dsg-job-webhook
     templateName: dsg-job-webhook-trigger
     generateName: dsg-job-
     ttlSecondsAfterFinished: 600
+    restartPolicy: Never
+    volume:
+      mountPath: /efs
     variables:
       buildManagerUrl: http://build-manager
       remoteEnv: true

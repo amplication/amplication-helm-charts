@@ -38,13 +38,13 @@ spec:
                     tolerations:
                       {{- toYaml . | nindent 22 }}
                     {{- end }}
-                    restartPolicy: Never
+                    restartPolicy: {{ .Values.events.sensor.restartPolicy }}
                     containers:
                       - name: {{ include "data-service-generator.fullname" . }}
-                        image: {{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}
+                        image: {{ .Values.events.sensor.image.repository }}
                         command: ["sh", "-c"]
                         args: ["cd /workspace/packages/data-service-generator; node ./src/main.js"]
-                        imagePullPolicy: {{ .Values.image.imagePullPolicy | default "IfNotPresent" }}
+                        imagePullPolicy: {{ .Values.events.sensor.image.imagePullPolicy | default "IfNotPresent" }}
                         env:
                           - name: BUILD_ID
                             value: null
@@ -60,7 +60,7 @@ spec:
                             value: {{ .Values.events.sensor.variables.buildOutputPath | default "/efs/code" }}
                         volumeMounts:
                           - name: {{ include "data-service-generator.fullname" . }}-{{ .Values.storage.dataServiceGenerator.suffix }}-volume
-                            mountPath: "/efs"
+                            mountPath: {{ .Values.events.sensor.volume.mountPath }}
                             subPathExpr: $(BUILD_ID)
                         resources:
                           {{- toYaml .Values.events.sensor.resources | nindent 26 }}
@@ -79,4 +79,15 @@ spec:
                 dependencyName: request
                 dataKey: body.resourceId
               dest: spec.template.spec.containers.0.env.1.value
+            - src:
+                dependencyName: request
+                value: ":"
+              dest: spec.template.spec.containers.0.image
+              operation: append
+            - src:
+                dependencyName: request
+                dataKey: body.containerImageTag
+                value: {{ .Values.events.sensor.image.tag }}
+              dest: spec.template.spec.containers.0.image
+              operation: append
 {{- end }}
