@@ -10,9 +10,9 @@ mountOptions:
 parameters:
   provisioningMode: {{ .provisioningMode }}
   fileSystemId: {{ .id }}
-  directoryPerms: {{ .directoryPerms }}
-  gidRangeStart: {{ .gidRangeStart }}
-  gidRangeEnd: {{ .gidRangeEnd }}
+  directoryPerms: {{ .directoryPerms | squote }}
+  gidRangeStart: {{ .gidRangeStart | squote }}
+  gidRangeEnd: {{ .gidRangeEnd | squote }}
 {{- end }}
 {{- end }}
 ---
@@ -28,8 +28,8 @@ mountOptions:
 parameters:
   provisioningMode: {{ .provisioningMode }}
   fileSystemId: {{ .id }}
-  directoryPerms: {{ .directoryPerms }}
-  gidRangeStart: {{ .gidRangeStart }}
-  gidRangeEnd: {{ .gidRangeEnd }}
+  directoryPerms: {{ .directoryPerms | squote }}
+  gidRangeStart: {{ .gidRangeStart | squote }}
+  gidRangeEnd: {{ .gidRangeEnd | squote }}
 {{- end }}
 {{- end }}

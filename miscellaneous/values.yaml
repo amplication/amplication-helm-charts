@@ -48,17 +48,17 @@ storageClass:
     name: efs-main-sc
     provisioningMode: efs-ap
     id: "<provising-id>"
-    directoryPerms: "755"
-    gidRangeStart: "1000"
-    gidRangeEnd: "2000"
+    directoryPerms: '755'
+    gidRangeStart: '1000'
+    gidRangeEnd: '2000'
   dsg:
     enabled: true
     name: efs-dsg-sc
     provisioningMode: efs-ap
-    id: "<provising-id>"
-    directoryPerms: "755"
-    gidRangeStart: "1000"
-    gidRangeEnd: "2000"
+    id: '<provising-id>'
+    directoryPerms: '755'
+    gidRangeStart: '1000'
+    gidRangeEnd: '2000'
 
 nameOverride: ""
 fullnameOverride: ""
