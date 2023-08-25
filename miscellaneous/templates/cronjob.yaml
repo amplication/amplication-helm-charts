@@ -1,6 +1,6 @@
 {{- if .Values.imagePullSecretSetup.enabled }}
 {{- range .Values.namespace.names }}
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg
