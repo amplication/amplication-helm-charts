@@ -3,7 +3,7 @@ name: plugin-api
 description: A Helm chart for the plugin-api component of Amplication
 
 type: application
-version: 1.1.2
+version: 1.1.3
 appVersion: "0.0.0"
 
 sources:
