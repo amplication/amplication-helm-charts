@@ -471,6 +471,28 @@ entries:
   miscellaneous:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-25T18:54:01.639673179Z"
+    dependencies:
+    - alias: istio-ingress-gateway
+      name: gateway
+      repository: https://istio-release.storage.googleapis.com/charts
+      version: 1.15.0
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: 02005eac6fad0b64a1c2772e321634beb7d52391c5e794ce334409a7c637867e
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: miscellaneous
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-1.1.3/miscellaneous-1.1.3.tgz
+    version: 1.1.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-16T11:47:23.005000775Z"
     dependencies:
     - alias: istio-ingress-gateway
@@ -552,6 +574,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-1.0.0/miscellaneous-1.0.0.tgz
     version: 1.0.0
   plugin-api:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-25T18:54:01.814887429Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: b1abf8d7b8b6770f7cba66e7d72eba12e0c15020e1ddae433d251275213a2cdc
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-1.1.3/plugin-api-1.1.3.tgz
+    version: 1.1.3
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-16T09:36:30.811867204Z"
@@ -809,4 +847,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-24T09:23:39.809118692Z"
+generated: "2023-08-25T18:54:01.815145833Z"
