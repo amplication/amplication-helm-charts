@@ -990,6 +990,22 @@ entries:
   storage-gateway:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-26T17:07:59.28491448Z"
+    description: A Helm chart for the storage-gateway component of Amplication
+    digest: 0cbd7dbd08af940744071227c2cb4f160cdc021270af44509a5269f9193bf72d
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: storage-gateway
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-1.1.4/storage-gateway-1.1.4.tgz
+    version: 1.1.4
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-16T11:47:23.291265703Z"
     description: A Helm chart for the storage-gateway component of Amplication
     digest: 0a5fd100e81c33faa3dfff77139472c75d3906174dee93ea5f3b16623933b4cd
@@ -1111,4 +1127,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-26T16:53:47.275800709Z"
+generated: "2023-08-26T17:07:59.285211184Z"
