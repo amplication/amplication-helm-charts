@@ -22,7 +22,7 @@ spec:
             {{- toYaml . | nindent 10 }}
           {{- end }}
         spec:
-          serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}
+          serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}-{{ . }}
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
           containers:
