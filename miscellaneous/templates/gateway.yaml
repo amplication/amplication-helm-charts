@@ -24,7 +24,7 @@ spec:
     - port:
         number: 443
         name: https
-        protocol: HTTPS
+        protocol: HTTP
       {{- with .hosts}}
       hosts:
         {{- toYaml . | nindent 8 }}
