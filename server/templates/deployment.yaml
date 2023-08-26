@@ -34,7 +34,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: "{{ .Chart.Name }}-migrate"
-          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh"]
           args: ["-c", "npx prisma migrate deploy --schema prisma/schema.prisma", ";", "exit"]
