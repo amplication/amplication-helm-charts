@@ -40,11 +40,10 @@ spec:
                 DOCKER_PASSWORD=$(aws ecr get-login --region ${AWS_REGION} --registry-ids ${AWS_ACCOUNT} | cut -d' ' -f6)
                 kubectl delete secret {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg || true
                 kubectl create secret docker-registry {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg \
-                  --docker-server=$DOCKER_REGISTRY_SERVER \
-                  --docker-username=$DOCKER_USER \
-                  --docker-password=$DOCKER_PASSWORD \
-                  --docker-email=no@email.local \
-                  --namespace={{ . }}
----
+                --docker-server=$DOCKER_REGISTRY_SERVER \
+                --docker-username=$DOCKER_USER \
+                --docker-password=$DOCKER_PASSWORD \
+                --docker-email=no@email.local \
+                --namespace={{ . }}
 {{- end }}
 {{- end }}
