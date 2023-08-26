@@ -1081,6 +1081,22 @@ entries:
   server:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-26T18:15:04.229677515Z"
+    description: A Helm chart for the server component of Amplication
+    digest: 636608ae653cde1874f4cefd636fee4125bece981aa2b8b7a16e34d70c9172eb
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: server
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/server-2.0.2/server-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-26T17:56:56.601409501Z"
     description: A Helm chart for the server component of Amplication
     digest: 9d32ac9b126373c6bae29909a458d09dcfe29f8a6bb9410210e94ec69b51538b
@@ -1357,4 +1373,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-26T17:56:56.601619403Z"
+generated: "2023-08-26T18:15:04.229893615Z"
