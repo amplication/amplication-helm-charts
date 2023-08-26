@@ -9,10 +9,13 @@ metadata:
   annotations:
     {{- $.Values.annotations | toYaml | nindent 4 }}
 rules:
-  - apiGroups: ["v1"]
+  - apiGroups: [""]
     resources: ["secrets"]
     resourceNames: ["{{ include "miscellaneous.fullname" $ }}-ecr-dockercfg"]
-    verbs: ["delete", "create"]
+    verbs: ["delete"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -23,11 +26,14 @@ metadata:
   annotations:
     {{- $.Values.annotations | toYaml | nindent 4 }}
 roleRef:
+  apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: {{ include "miscellaneous.fullname" $ }}-role
-  apiGroup: rbac.authorization.k8s.io
 subjects:
+  {{- range $.Values.namespace.names }}
   - kind: ServiceAccount
-    name: {{ include "miscellaneous.serviceAccountName" $ }}
+    name: {{ include "miscellaneous.serviceAccountName" $ }}-{{ . }}
+    namespace: {{ . }}
+  {{- end }}
 {{- end }}
 {{- end }}

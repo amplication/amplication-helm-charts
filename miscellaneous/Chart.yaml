@@ -3,7 +3,7 @@ name: miscellaneous
 description: A Helm chart for miscellaneous resources that components of Amplication use
 
 type: application
-version: 1.1.9
+version: 1.2.0
 appVersion: "0.0.0"
 
 dependencies:
