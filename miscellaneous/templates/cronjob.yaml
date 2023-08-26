@@ -4,7 +4,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg
+  name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg-{{ . }}
   namespace: {{ . }}
   labels:
     {{- include "miscellaneous.labels" $ | nindent 4 }}
@@ -19,7 +19,7 @@ spec:
         metadata:
           {{- with $.Values.imagePullSecretSetup.cronJob.annotations }}
           annotations:
-            {{- toYaml . | nindent 10 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
         spec:
           serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}-{{ . }}
