@@ -32,6 +32,12 @@ spec:
               envFrom:
                 - secretRef:
                     name: {{ include "miscellaneous.fullname" $ }}-ecr-secret
+              env:
+                - name: NAMESPACE
+                  valueFrom:
+                    fieldRed:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
               command:
               - "/bin/sh"
               - "-c"
@@ -45,6 +51,6 @@ spec:
                 --docker-username=$DOCKER_USER \
                 --docker-password=$DOCKER_PASSWORD \
                 --docker-email=no@email.local \
-                --namespace={{ . }}
+                --namespace=$NAMESPACE
 {{- end }}
 {{- end }}
