@@ -7,6 +7,5 @@ metadata:
   name: {{ . }}
   labels:
     {{- include "miscellaneous.labels" $ | nindent 4 }}
-    {{- $key | nindent 4 }}: {{ $value }}
 {{- end}}
 {{- end }}
