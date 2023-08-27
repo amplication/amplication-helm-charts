@@ -72,10 +72,16 @@ events:
         cpu: 1200m
         memory: 3000Mi
 
+rbac:
+  enabled: true
+  argoEventsServiceAccount: argo-events-sa
+
 serviceAccount:
   create: true
   annotations: {}
   name: ""
+
+annotations: {}
 
 nodeSelector:
   role: dsg
