@@ -3,26 +3,6 @@ namespace:
     - sandbox
     - sandbox-dsg
 
-istio-ingress-gateway:
-  replicaCount: 2
-  service:
-    annotations: {}
-      # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-      # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
-      # service.beta.kubernetes.io/aws-load-balancer-ssl-negotiation-policy: ELBSecurityPolicy-TLS-1-2-2017-01
-      # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <path:sandbox-shared/data/acm/primary#arn>
-      # external-dns.alpha.kubernetes.io/hostname: "app.amplication-sandbox.com,server.amplication-sandbox.com,webhooks.amplication-sandbox.com,plugin-api.amplication-sandbox.com"
-
-gateway:
-  name: main-gateway
-  namespace: istio-system
-  domain: amplication-sandbox.com
-  hosts: []
-    # - app.amplication-sandbox.com
-    # - server.amplication-sandbox.com
-    # - webhooks.amplication-sandbox.com
-    # - plugin-api.amplication-sandbox.com
-
 imagePullSecretSetup:
   enabled: false
   cronJob:

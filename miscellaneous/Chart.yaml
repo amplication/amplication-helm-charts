@@ -3,14 +3,8 @@ name: miscellaneous
 description: A Helm chart for miscellaneous resources that components of Amplication use
 
 type: application
-version: 2.0.1
+version: 2.0.2
 appVersion: "0.0.0"
-
-dependencies:
-  - name: gateway
-    alias: istio-ingress-gateway
-    version: 1.15.0
-    repository: https://istio-release.storage.googleapis.com/charts
 
 sources:
   - https://github.com/amplication/amplication
