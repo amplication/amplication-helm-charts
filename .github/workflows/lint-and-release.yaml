@@ -1,6 +1,8 @@
 name: lint and release helm charts
 run-name: lint and release helm charts by @${{ github.actor }}
 
+concurrency: lint-and-release-helm-charts
+
 on:
   workflow_dispatch:
   pull_request: 
