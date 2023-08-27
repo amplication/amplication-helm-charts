@@ -40,6 +40,8 @@ events:
     webhook:
       endpoint: /example
       method: POST
+      port: '12000'
+      url: ''
   eventBus:
     enabled: true
     name: default
