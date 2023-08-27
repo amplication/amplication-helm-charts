@@ -599,6 +599,23 @@ entries:
   miscellaneous:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T10:38:43.733549121Z"
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: fdb42cd0cb4a7e75861ab9dc8a606ae199960d36c11079c4e2c4bf484105fa6f
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: miscellaneous
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-2.0.4/miscellaneous-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-27T10:22:46.969405863Z"
     description: A Helm chart for miscellaneous resources that components of Amplication
       use
@@ -1044,6 +1061,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-1.0.0/miscellaneous-1.0.0.tgz
     version: 1.0.0
   plugin-api:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-27T10:38:43.884143506Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 00c30f6d6133e24711ae6f34bddaa779c0c8d56dfea6b5292bf56f04ba9aa9f1
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.4/plugin-api-2.0.4.tgz
+    version: 2.0.4
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-27T07:35:13.587895803Z"
@@ -1509,4 +1542,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T10:22:46.969769368Z"
+generated: "2023-08-27T10:38:43.884558219Z"
