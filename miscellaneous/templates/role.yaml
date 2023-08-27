@@ -30,12 +30,10 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "miscellaneous.fullname" $ }}-role
+  name: {{ include "miscellaneous.fullname" $ }}-role-{{ . }}
 subjects:
-  {{- range $.Values.namespace.names }}
   - kind: ServiceAccount
     name: {{ include "miscellaneous.serviceAccountName" $ }}-{{ . }}
     namespace: {{ . }}
-  {{- end }}
 {{- end }}
 {{- end }}
