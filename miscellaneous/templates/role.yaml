@@ -1,6 +1,6 @@
 {{- if .Values.rbac.enabled }}
 {{- range .Values.namespace.names }}
-{{- with .Values.rbac }}
+{{- with $.Values.rbac }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
