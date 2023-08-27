@@ -53,7 +53,7 @@ spec:
                           - name: BUILD_MANAGER_URL
                             value: {{ .Values.events.sensor.variables.buildManagerUrl | default "http://build-manager" }}
                           - name: REMOTE_ENV
-                            value: {{ .Values.events.sensor.variables.remoteEnv | default true }}
+                            value: {{ .Values.events.sensor.variables.remoteEnv | quote | default "true" }}
                           - name: BUILD_SPEC_PATH
                             value: {{ .Values.events.sensor.variables.buildSpecPath | default "/efs/input.json" }}
                           - name: BUILD_OUTPUT_PATH
