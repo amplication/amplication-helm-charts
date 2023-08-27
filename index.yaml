@@ -990,6 +990,22 @@ entries:
   plugin-api:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T07:20:15.077323773Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 3fc991192b6cb0030f17b540145b034afae07df66cf58a422130e2e6205753f5
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.2/plugin-api-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-26T18:21:51.27034766Z"
     description: A Helm chart for the plugin-api component of Amplication
     digest: ad475a3a1a9c575d0f3681d873bf3ca895c57edc935a60effae5ca708df9155c
@@ -1389,4 +1405,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-26T18:21:51.270522759Z"
+generated: "2023-08-27T07:20:15.077634377Z"
