@@ -990,6 +990,22 @@ entries:
   plugin-api:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T07:35:13.587895803Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 6b5e14045153cb1bba4436cc1442cfc1d777a88427d4a407dad36ba86bc1adbe
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.3/plugin-api-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-27T07:20:15.077323773Z"
     description: A Helm chart for the plugin-api component of Amplication
     digest: 3fc991192b6cb0030f17b540145b034afae07df66cf58a422130e2e6205753f5
@@ -1111,6 +1127,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-1.0.0/plugin-api-1.0.0.tgz
     version: 1.0.0
   server:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-27T07:35:13.725177122Z"
+    description: A Helm chart for the server component of Amplication
+    digest: 6c4fe146dc5cf8b95201e8d3dfffc1d020877ef7c91a57820b9f6084fab2ca1f
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: server
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/server-2.0.3/server-2.0.3.tgz
+    version: 2.0.3
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-26T18:15:04.229677515Z"
@@ -1405,4 +1437,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T07:20:15.077634377Z"
+generated: "2023-08-27T07:35:13.725420527Z"
