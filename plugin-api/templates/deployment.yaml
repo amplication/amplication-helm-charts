@@ -39,11 +39,11 @@ spec:
           command: ["/bin/sh"]
           args: ["-c", "npx prisma migrate deploy --schema prisma/schema.prisma", ";", "exit"]
           env:
-            - name: POSTGRESQL_URL
+            - name: DB_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ include "plugin-api.fullname" . }}-variables
-                  key: POSTGRESQL_URL
+                  key: DB_URL
                   optional: false
       containers:
         - name: {{ .Chart.Name }}
