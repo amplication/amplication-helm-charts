@@ -1,9 +1,11 @@
 namespace: 
   names:
-    - sandbox
-    - sandbox-dsg
-  labels:
-    istio-injection: disabled
+    - name: sandbox
+      labels:
+        istio-injection: enabled
+    - name: sandbox-dsg
+      labels:
+        istio-injection: disabled
 
 imagePullSecretSetup:
   enabled: false

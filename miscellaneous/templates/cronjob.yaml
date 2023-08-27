@@ -4,8 +4,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg-{{ . }}
-  namespace: {{ . }}
+  name: {{ include "miscellaneous.fullname" $ }}-ecr-dockercfg-{{ .name }}
+  namespace: {{ .name }}
   labels:
     {{- include "miscellaneous.labels" $ | nindent 4 }}
 spec:
@@ -22,7 +22,7 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
         spec:
-          serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}-{{ . }}
+          serviceAccountName: {{ include "miscellaneous.serviceAccountName" $ }}-{{ .name }}
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
           containers:

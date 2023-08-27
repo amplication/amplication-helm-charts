@@ -4,9 +4,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ . }}
+  name: {{ .name }}
   labels:
-    {{- with $.Values.namespace.labels }}
+    {{- with .labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
     {{- include "miscellaneous.labels" $ | nindent 4 }}
