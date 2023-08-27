@@ -2,8 +2,6 @@ namespace:
   names:
     - sandbox
     - sandbox-dsg
-  labels:
-    istio-injection: enabled
 
 istio-ingress-gateway:
   replicaCount: 2

@@ -5,10 +5,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ . }}
-  {{- range $key, $value := $.Values.namespace.labels }}
   labels:
     {{- include "miscellaneous.labels" $ | nindent 4 }}
     {{- $key | nindent 4 }}: {{ $value }}
-  {{- end }}
 {{- end}}
 {{- end }}
