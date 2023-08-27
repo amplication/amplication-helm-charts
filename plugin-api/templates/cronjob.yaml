@@ -14,8 +14,8 @@ spec:
       template:
         metadata:
         {{- with .annotations }}
-        annotations:
-          {{- toYaml . | nindent 10 }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
         {{- end }}
         spec:
           serviceAccountName: {{ include "plugin-api.serviceAccountName" $ }}
