@@ -2,6 +2,8 @@ namespace:
   names:
     - sandbox
     - sandbox-dsg
+  labels:
+    istio-injection: disabled
 
 imagePullSecretSetup:
   enabled: false
@@ -10,8 +12,7 @@ imagePullSecretSetup:
     history:
       successful: 2
       failed: 2
-    annotations:
-      sidecar.istio.io/inject: "false"
+    annotations: {}
   variables:
     secret: {}
     externalSecret: {}

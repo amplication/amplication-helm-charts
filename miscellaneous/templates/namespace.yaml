@@ -6,6 +6,7 @@ kind: Namespace
 metadata:
   name: {{ . }}
   labels:
+    {{- include "miscellaneous.namespace.labels" $ | nindent 4 }}
     {{- include "miscellaneous.labels" $ | nindent 4 }}
 {{- end}}
 {{- end }}
