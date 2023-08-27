@@ -13,9 +13,8 @@ spec:
         targetPort: {{ .service.port }}
   webhook:
     dsg:
-      port: {{ .webhook.port }}
-      endpoint: {{ .webhook.endpoint }}
-      method: {{ .webhook.method }}
-      url: {{ .webhook.url }}
+      port: "{{ .service.port }}"
+      endpoint: "{{ .webhook.endpoint }}"
+      method: "{{ .webhook.method }}"
 {{- end }}
 {{- end }}
