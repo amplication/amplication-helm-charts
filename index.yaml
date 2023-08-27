@@ -137,6 +137,22 @@ entries:
   data-service-generator:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T13:42:42.359221391Z"
+    description: A Helm chart for the data-service-generator component of Amplication
+    digest: 1eb88763323ec2a7dfca064adb55d5b05a1cc96006b55dd6f0cfbb254c93e803
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: data-service-generator
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/data-service-generator-2.0.4/data-service-generator-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-27T13:20:50.594631403Z"
     description: A Helm chart for the data-service-generator component of Amplication
     digest: 5ce3b873550fc5ddaec3c4e9d69d047f63770ac32d9662d04f2216d07cc0a05d
@@ -1692,4 +1708,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T13:20:50.800756698Z"
+generated: "2023-08-27T13:42:42.359438096Z"
