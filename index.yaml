@@ -599,6 +599,23 @@ entries:
   miscellaneous:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T08:49:37.918756532Z"
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: 40df6f76492b8c78ef2e3c61261103cefeed6cbdf8499a21c62b5f4d01288354
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: miscellaneous
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-2.0.2/miscellaneous-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-27T08:19:21.217381796Z"
     dependencies:
     - alias: istio-ingress-gateway
@@ -1459,4 +1476,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T08:19:21.217628001Z"
+generated: "2023-08-27T08:49:37.919959452Z"
