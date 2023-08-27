@@ -599,6 +599,23 @@ entries:
   miscellaneous:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-27T10:51:34.379972901Z"
+    description: A Helm chart for miscellaneous resources that components of Amplication
+      use
+    digest: 8adb7bf35b0220b037403660b74cd87ef6cc30e772bd2d7312cc702829753e11
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: miscellaneous
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/miscellaneous-2.0.5/miscellaneous-2.0.5.tgz
+    version: 2.0.5
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-27T10:38:43.733549121Z"
     description: A Helm chart for miscellaneous resources that components of Amplication
       use
@@ -1542,4 +1559,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T10:38:43.884558219Z"
+generated: "2023-08-27T10:51:34.380461205Z"
