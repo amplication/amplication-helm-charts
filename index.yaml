@@ -3,6 +3,22 @@ entries:
   build-manager:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-28T07:52:46.770005564Z"
+    description: A Helm chart for the build-manager component of Amplication
+    digest: 3c4cbceb0f072c4e0eb1d1595954a19755a668e728339529a669ac343a4473ac
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: build-manager
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/build-manager-2.0.1/build-manager-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-26T17:22:17.264506031Z"
     description: A Helm chart for the build-manager component of Amplication
     digest: e2e97c731b7a65b5eadf8a04d2740c04b3eea6940577f7cf867d18af3b1b7c05
@@ -1725,4 +1741,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-27T14:09:25.029327326Z"
+generated: "2023-08-28T07:52:46.770273567Z"
