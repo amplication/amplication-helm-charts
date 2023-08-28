@@ -1,0 +1,202 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "namespace": {
+            "type": "object",
+            "properties": {
+                "names": {
+                    "type": "array",
+                    "description": "List of namespaces which to create and possibly annotate with istio-injection",
+                    "default": [],
+                    "items": {}
+                }
+            }
+        },
+        "imagePullSecretSetup": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Boolean for enabling the cronjob that creates a dockercfg secret for ecr authentication",
+                    "default": false
+                },
+                "cronJob": {
+                    "type": "object",
+                    "properties": {
+                        "schedule": {
+                            "type": "string",
+                            "description": "The cronjob timer on which to run the image pull secret creation job",
+                            "default": "*/10 * * * *"
+                        },
+                        "history": {
+                            "type": "object",
+                            "properties": {
+                                "successful": {
+                                    "type": "number",
+                                    "description": "The amount of succesful jobs to keep",
+                                    "default": 2
+                                },
+                                "failed": {
+                                    "type": "number",
+                                    "description": "The amount of failed jobs to keep",
+                                    "default": 2
+                                }
+                            }
+                        },
+                        "annotations": {
+                            "type": "object",
+                            "description": "The annotations to add to the job template",
+                            "default": {}
+                        }
+                    }
+                },
+                "variables": {
+                    "type": "object",
+                    "properties": {
+                        "secret": {
+                            "type": "object",
+                            "description": "A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)",
+                            "default": {}
+                        },
+                        "externalSecret": {
+                            "type": "object",
+                            "description": "A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)",
+                            "default": {}
+                        },
+                        "secretStoreConfiguration": {
+                            "type": "object",
+                            "description": "When using external secrets this part of the configuration is used to point to the secret store or cluster secret store",
+                            "default": {}
+                        }
+                    }
+                }
+            }
+        },
+        "storageClass": {
+            "type": "object",
+            "properties": {
+                "main": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Boolean to enable or disable the main storage class",
+                            "default": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "String the name for the main efs based storage class",
+                            "default": "efs-main-sc"
+                        },
+                        "provisioningMode": {
+                            "type": "string",
+                            "description": "String the provisiong mode for the main efs",
+                            "default": "efs-ap"
+                        },
+                        "id": {
+                            "type": "string",
+                            "description": "String the provisiong id for the main efs",
+                            "default": "<provising-id>"
+                        },
+                        "directoryPerms": {
+                            "type": "string",
+                            "description": "",
+                            "default": "755"
+                        },
+                        "gidRangeStart": {
+                            "type": "string",
+                            "description": "String group id range start for the permissions on the main storage class",
+                            "default": "1000"
+                        },
+                        "gidRangeEnd": {
+                            "type": "string",
+                            "description": "String group id range end for the permissions on the main storage class",
+                            "default": "2000"
+                        }
+                    }
+                },
+                "dsg": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Boolean to enable or disable the dsg storage class",
+                            "default": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "String the name for the dsg efs based storage class",
+                            "default": "efs-dsg-sc"
+                        },
+                        "provisioningMode": {
+                            "type": "string",
+                            "description": "String the provisiong mode for the dsg efs",
+                            "default": "efs-ap"
+                        },
+                        "id": {
+                            "type": "string",
+                            "description": "String the provisiong id for the dsg efs",
+                            "default": "<provising-id>"
+                        },
+                        "directoryPerms": {
+                            "type": "string",
+                            "description": "String unix style permissions on the dsg storage class",
+                            "default": "755"
+                        },
+                        "gidRangeStart": {
+                            "type": "string",
+                            "description": "String group id range start for the permissions on the dsg storage class",
+                            "default": "1000"
+                        },
+                        "gidRangeEnd": {
+                            "type": "string",
+                            "description": "String group id range end for the permissions on the dsg storage class",
+                            "default": "2000"
+                        }
+                    }
+                }
+            }
+        },
+        "nameOverride": {
+            "type": "string",
+            "description": "String to fully override chart name (will maintain the release name)",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "description": "String to fully override chart name",
+            "default": ""
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "description": "Specifies whether a service account should be created",
+                    "default": true
+                },
+                "annotations": {
+                    "type": "object",
+                    "description": "Annotations to add to the service account",
+                    "default": {}
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the service account to use. If not set and create is true, a name is generated using the fullname template",
+                    "default": ""
+                }
+            }
+        },
+        "rbac": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Boolean for adding the role & role-binding setup required for creating ecr dockercfg secrets",
+                    "default": true
+                }
+            }
+        }
+    }
+}

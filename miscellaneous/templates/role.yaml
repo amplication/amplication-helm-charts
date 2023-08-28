@@ -8,8 +8,6 @@ metadata:
   namespace: {{ .name }}
   labels:
     {{- include "miscellaneous.labels" $ | nindent 4}}
-  annotations:
-    {{- $.Values.annotations | toYaml | nindent 4 }}
 rules:
   - apiGroups: [""]
     resources: ["secrets"]

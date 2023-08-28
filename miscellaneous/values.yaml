@@ -1,12 +1,35 @@
-namespace: 
-  names:
-    - name: sandbox
-      labels:
-        istio-injection: enabled
-    - name: sandbox-dsg
-      labels:
-        istio-injection: disabled
+## @section miscellaneous parameters
+## @descriptionStart These parameters only apply to the miscellaneous component.
+## @descriptionEnd
+##
 
+## @param namespace.names List of namespaces which to create and possibly annotate with istio-injection
+## Example:
+## namespace: 
+##   names:
+##     - name: sandbox
+##       labels:
+##         istio-injection: enabled
+##     - name: sandbox-dsg
+##       labels:
+##         istio-injection: disabled
+namespace: 
+  names: []
+
+## @param imagePullSecretSetup.enabled Boolean for enabling the cronjob that creates a dockercfg secret for ecr authentication
+## @param imagePullSecretSetup.cronJob.schedule The cronjob timer on which to run the image pull secret creation job
+## @param imagePullSecretSetup.cronJob.history.successful The amount of succesful jobs to keep
+## @param imagePullSecretSetup.cronJob.history.failed The amount of failed jobs to keep
+## @param imagePullSecretSetup.cronJob.annotations The annotations to add to the job template
+## @param imagePullSecretSetup.variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
+## @param imagePullSecretSetup.variables.externalSecret A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)
+## @param imagePullSecretSetup.variables.secretStoreConfiguration When using external secrets this part of the configuration is used to point to the secret store or cluster secret store
+## Example - variables.secretStoreConfiguration:
+## variables:
+##   secretStoreConfiguration: {}
+##     kind: ClusterSecretStore
+##     name: aws-parameter-store-[environment]
+##     enabled: true
 imagePullSecretSetup:
   enabled: false
   cronJob:
@@ -18,11 +41,22 @@ imagePullSecretSetup:
   variables:
     secret: {}
     externalSecret: {}
-    secretStoreConfiguration:
-      kind: ClusterSecretStore
-      name: ""
-      enabled: false
+    secretStoreConfiguration: {}
 
+## @param storageClass.main.enabled Boolean to enable or disable the main storage class
+## @param storageClass.main.name String the name for the main efs based storage class
+## @param storageClass.main.provisioningMode String the provisiong mode for the main efs
+## @param storageClass.main.id String the provisiong id for the main efs
+## @param storageClass.main.directoryPerms
+## @param storageClass.main.gidRangeStart String group id range start for the permissions on the main storage class
+## @param storageClass.main.gidRangeEnd String group id range end for the permissions on the main storage class
+## @param storageClass.dsg.enabled Boolean to enable or disable the dsg storage class
+## @param storageClass.dsg.name String the name for the dsg efs based storage class
+## @param storageClass.dsg.provisioningMode String the provisiong mode for the dsg efs
+## @param storageClass.dsg.id String the provisiong id for the dsg efs
+## @param storageClass.dsg.directoryPerms String unix style permissions on the dsg storage class
+## @param storageClass.dsg.gidRangeStart String group id range start for the permissions on the dsg storage class
+## @param storageClass.dsg.gidRangeEnd String group id range end for the permissions on the dsg storage class
 storageClass:
   main:
     enabled: true
@@ -41,15 +75,29 @@ storageClass:
     gidRangeStart: '1000'
     gidRangeEnd: '2000'
 
+## @param nameOverride String to fully override chart name (will maintain the release name)
+##
 nameOverride: ""
+
+## @param fullnameOverride String to fully override chart name
+##
 fullnameOverride: ""
 
+## Service account for generated-service-admin to use.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+##
 serviceAccount:
+  ## @param serviceAccount.create Specifies whether a service account should be created
+  ##
   create: true
+  ## @param serviceAccount.annotations Annotations to add to the service account
+  ##
   annotations: {}
+  ## @param serviceAccount.name The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  ##
   name: ""
 
+## @param rbac.enabled Boolean for adding the role & role-binding setup required for creating ecr dockercfg secrets
+##
 rbac:
   enabled: true
-  
-annotations: {}
