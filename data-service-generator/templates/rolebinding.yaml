@@ -12,5 +12,5 @@ roleRef:
   name: {{ include "data-service-generator.fullname" $ }}-role
 subjects:
   - kind: ServiceAccount
-    name: {{ .Values.rbac.argoEventsServiceAccount }}
+    name: {{ .Values.rbac.serviceAccountName }}
 {{- end }}
