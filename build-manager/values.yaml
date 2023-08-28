@@ -39,7 +39,7 @@ podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
 
-containerPort: 3333
+containerPort: 80
 
 service:
   type: ClusterIP
