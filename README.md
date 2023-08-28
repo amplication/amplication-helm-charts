@@ -50,3 +50,4 @@ List of the different Amplication component charts that are availale through thi
 - plugin-api
 - server
 - storage-gateway
+- website
