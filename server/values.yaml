@@ -1,5 +1,5 @@
-## @section git-pull-request-service parameters
-## @descriptionStart These parameters only apply to the git-pull-request-service component.
+## @section giserver parameters
+## @descriptionStart These parameters only apply to the giserver component.
 ## @descriptionEnd
 ##
 
@@ -84,7 +84,7 @@ nameOverride: ""
 ##
 fullnameOverride: ""
 
-## Service account for generated-service-admin to use.
+## Service account for server to use.
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
 ##
 serviceAccount:

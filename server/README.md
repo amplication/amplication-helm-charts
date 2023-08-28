@@ -8,9 +8,9 @@
 
 ## Parameters
 
-### git-pull-request-service parameters
+### giserver parameters
 
-These parameters only apply to the git-pull-request-service component.
+These parameters only apply to the giserver component.
 
 | Name                                            | Description                                                                                                                        | Value                                                             |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
