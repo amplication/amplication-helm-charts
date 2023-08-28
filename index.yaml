@@ -486,6 +486,22 @@ entries:
   git-pull-request-service:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-28T15:29:58.724683019Z"
+    description: A Helm chart for the git-pull-request-service component of Amplication
+    digest: 11eab314d5833db0f93ac1486f02d6c54fbbf3d8229c138e3a85c256144b7867
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: git-pull-request-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-pull-request-service-2.0.2/git-pull-request-service-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-26T17:22:17.972835008Z"
     description: A Helm chart for the git-pull-request-service component of Amplication
     digest: de92ed5a92196bda5b2253d42749ab7b51258c2c26e8f0744a4a6ea6a3948637
@@ -1854,4 +1870,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-28T15:29:01.72486657Z"
+generated: "2023-08-28T15:29:58.724994924Z"
