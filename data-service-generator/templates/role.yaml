@@ -6,8 +6,6 @@ metadata:
   name: {{ include "data-service-generator.fullname" $ }}-role
   labels:
     {{- include "data-service-generator.labels" $ | nindent 4}}
-  annotations:
-    {{- .Values.annotations | toYaml | nindent 4 }}
 rules:
   - apiGroups: [""]
     resources: ["pods"]

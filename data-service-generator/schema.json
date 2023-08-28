@@ -1,0 +1,374 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "nameOverride": {
+            "type": "string",
+            "description": "String to fully override chart name (will maintain the release name)",
+            "default": ""
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "description": "String to fully override chart name",
+            "default": ""
+        },
+        "imagePullSecrets": {
+            "type": "array",
+            "description": "Reference to Kubernetes secrets housing dockercfg to fetch images from private registries",
+            "default": [],
+            "items": {}
+        },
+        "variables": {
+            "type": "object",
+            "properties": {
+                "configmap": {
+                    "type": "object",
+                    "description": "A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)",
+                    "default": {}
+                },
+                "secret": {
+                    "type": "object",
+                    "description": "A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)",
+                    "default": {}
+                },
+                "externalSecret": {
+                    "type": "object",
+                    "description": "A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)",
+                    "default": {}
+                },
+                "secretStoreConfiguration": {
+                    "type": "object",
+                    "description": "When using external secrets this part of the configuration is used to point to the secret store or cluster secret store",
+                    "default": {}
+                }
+            }
+        },
+        "storage": {
+            "type": "object",
+            "properties": {
+                "dataServiceGenerator": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable the dsg pv & pvc setup",
+                            "default": true
+                        },
+                        "suffix": {
+                            "type": "string",
+                            "description": "Whether to enable the dsg pv & pvc setup",
+                            "default": "dsg"
+                        },
+                        "storageClassName": {
+                            "type": "string",
+                            "description": "The storage class to assign to the pv & pvc",
+                            "default": "efs-dsg-sc"
+                        },
+                        "persistentVolume": {
+                            "type": "object",
+                            "properties": {
+                                "volumeHandle": {
+                                    "type": "string",
+                                    "description": "A combination of the provioning id & access point id of the efs",
+                                    "default": "<volume_handle>"
+                                }
+                            }
+                        }
+                    }
+                },
+                "main": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable the main pv & pvc setup",
+                            "default": true
+                        },
+                        "suffix": {
+                            "type": "string",
+                            "description": "Whether to enable the dsg pv & pvc setup",
+                            "default": "main"
+                        },
+                        "storageClassName": {
+                            "type": "string",
+                            "description": "The storage class to assign to the pv & pvc",
+                            "default": "efs-main-sc"
+                        },
+                        "persistentVolume": {
+                            "type": "object",
+                            "properties": {
+                                "volumeHandle": {
+                                    "type": "string",
+                                    "description": "A combination of the provioning id & access point id of the efs",
+                                    "default": "<volume_handle>"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "events": {
+            "type": "object",
+            "properties": {
+                "eventSource": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable the argo events event-source",
+                            "default": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Name to give to the event-source object",
+                            "default": "webhook"
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "port": {
+                                    "type": "number",
+                                    "description": "The target port the assign to the eventsource service configuration",
+                                    "default": 12000
+                                }
+                            }
+                        },
+                        "webhook": {
+                            "type": "object",
+                            "properties": {
+                                "endpoint": {
+                                    "type": "string",
+                                    "description": "The path to use on the endpoint",
+                                    "default": "/example"
+                                },
+                                "method": {
+                                    "type": "string",
+                                    "description": "The method to use in conjunction with the eventsource",
+                                    "default": "POST"
+                                }
+                            }
+                        }
+                    }
+                },
+                "eventBus": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable the argo events event-bus",
+                            "default": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Name to give to the event-bus object",
+                            "default": "default"
+                        },
+                        "native": {
+                            "type": "object",
+                            "properties": {
+                                "replicas": {
+                                    "type": "number",
+                                    "description": "The amount of replicas to spin-up for the event-bus setup",
+                                    "default": 3
+                                },
+                                "auth": {
+                                    "type": "string",
+                                    "description": "The authentication method to be used within the event-bus setup",
+                                    "default": "token"
+                                }
+                            }
+                        }
+                    }
+                },
+                "sensor": {
+                    "type": "object",
+                    "properties": {
+                        "image": {
+                            "type": "object",
+                            "properties": {
+                                "repository": {
+                                    "type": "string",
+                                    "description": "Determine from which container repository to pull the image",
+                                    "default": "439403303254.dkr.ecr.us-east-1.amazonaws.com/data-service-generator"
+                                },
+                                "pullPolicy": {
+                                    "type": "string",
+                                    "description": "Determine when to pull an image",
+                                    "default": "Always"
+                                },
+                                "tag": {
+                                    "type": "string",
+                                    "description": "Determine which version of the image to pull from the container repository",
+                                    "default": ""
+                                }
+                            }
+                        },
+                        "enabled": {
+                            "type": "boolean",
+                            "description": "Whether to enable the argo events sensor used to for spinning up dsg jobs",
+                            "default": true
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Name to give to the sensor object",
+                            "default": "dsg-job-webhook"
+                        },
+                        "templateName": {
+                            "type": "string",
+                            "description": "The name to be assigned to the template within the sensor",
+                            "default": "dsg-job-webhook-trigger"
+                        },
+                        "generateName": {
+                            "type": "string",
+                            "description": "The prefix to be used for the name when generating a dsg jobs",
+                            "default": "dsg-job-"
+                        },
+                        "ttlSecondsAfterFinished": {
+                            "type": "number",
+                            "description": "The ttl of the job for the history after it has finished",
+                            "default": 600
+                        },
+                        "restartPolicy": {
+                            "type": "string",
+                            "description": "The restart policy for the dsg job",
+                            "default": "Never"
+                        },
+                        "volume": {
+                            "type": "object",
+                            "properties": {
+                                "mountPath": {
+                                    "type": "string",
+                                    "description": "The default mountpath on the efs",
+                                    "default": "/efs"
+                                }
+                            }
+                        },
+                        "variables": {
+                            "type": "object",
+                            "properties": {
+                                "buildManagerUrl": {
+                                    "type": "string",
+                                    "description": "The url of the build-manager which is communicates with",
+                                    "default": "http://build-manager"
+                                },
+                                "remoteEnv": {
+                                    "type": "string",
+                                    "description": "Variable to determine whether to use a remote env",
+                                    "default": "true"
+                                },
+                                "buildSpecPath": {
+                                    "type": "string",
+                                    "description": "The path for the buildspec on the efs volume mount",
+                                    "default": "/efs/input.json"
+                                },
+                                "buildOutputPath": {
+                                    "type": "string",
+                                    "description": "The output path to be used on the efs volume mount",
+                                    "default": "/efs/code"
+                                }
+                            }
+                        },
+                        "resources": {
+                            "type": "object",
+                            "properties": {
+                                "requests": {
+                                    "type": "object",
+                                    "properties": {
+                                        "cpu": {
+                                            "type": "string",
+                                            "description": "The requested CPU for the dsg container",
+                                            "default": "10m"
+                                        },
+                                        "memory": {
+                                            "type": "string",
+                                            "description": "The requested memory for the dsg container",
+                                            "default": "64Mi"
+                                        }
+                                    }
+                                },
+                                "limits": {
+                                    "type": "object",
+                                    "properties": {
+                                        "cpu": {
+                                            "type": "string",
+                                            "description": "The limit of CPU for the dsg container",
+                                            "default": "1200m"
+                                        },
+                                        "memory": {
+                                            "type": "string",
+                                            "description": "The limit of memory for the dsg container",
+                                            "default": "3000Mi"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "rbac": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Boolean for adding the role & role-binding setup required for creating ecr dockercfg secrets",
+                    "default": true
+                },
+                "serviceAccountName": {
+                    "type": "string",
+                    "description": "String the service account name to attach to the role & role-binding setup",
+                    "default": "data-service-generator"
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean",
+                    "description": "Specifies whether a service account should be created",
+                    "default": true
+                },
+                "annotations": {
+                    "type": "object",
+                    "description": "Annotations to add to the service account",
+                    "default": {}
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the service account to use. If not set and create is true, a name is generated using the fullname template",
+                    "default": ""
+                }
+            }
+        },
+        "nodeSelector": {
+            "type": "object",
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "description": "Node labels for pods assignment",
+                    "default": "dsg"
+                }
+            }
+        },
+        "tolerations": {
+            "type": "array",
+            "description": "Toleration key for pods assignment",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "description": "Toleration key for pods assignment"
+                    },
+                    "value": {
+                        "type": "string",
+                        "description": "Toleration value for pods assignment"
+                    }
+                }
+            }
+        }
+    }
+}

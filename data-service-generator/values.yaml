@@ -1,22 +1,45 @@
+## @param nameOverride String to fully override chart name (will maintain the release name)
+##
 nameOverride: ""
+
+## @param fullnameOverride String to fully override chart name
+##
 fullnameOverride: ""
 
+## @param imagePullSecrets Reference to Kubernetes secrets housing dockercfg to fetch images from private registries
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+## Example:
+## imagePullSecrets:
+##   - dockercfg-secret-name
+##
 imagePullSecrets: []
 
 ## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
 ## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
 ## @param variables.externalSecret A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)
 ## @param variables.secretStoreConfiguration When using external secrets this part of the configuration is used to point to the secret store or cluster secret store
+## Example - variables.secretStoreConfiguration:
+## variables:
+##   secretStoreConfiguration: {}
+##     kind: ClusterSecretStore
+##     name: aws-parameter-store-[environment]
+##     enabled: true
 ##
 variables:
   configmap: {}
   secret: {}
   externalSecret: {}
-  secretStoreConfiguration:
-    kind: ClusterSecretStore
-    name: ""
-    enabled: false
+  secretStoreConfiguration: {}
 
+## @param storage.dataServiceGenerator.enabled Whether to enable the dsg pv & pvc setup
+## @param storage.dataServiceGenerator.suffix Whether to enable the dsg pv & pvc setup
+## @param storage.dataServiceGenerator.storageClassName The storage class to assign to the pv & pvc
+## @param storage.dataServiceGenerator.persistentVolume.volumeHandle A combination of the provioning id & access point id of the efs
+## @param storage.main.enabled Whether to enable the main pv & pvc setup
+## @param storage.main.suffix Whether to enable the dsg pv & pvc setup
+## @param storage.main.storageClassName The storage class to assign to the pv & pvc
+## @param storage.main.persistentVolume.volumeHandle A combination of the provioning id & access point id of the efs
+##
 storage:
   dataServiceGenerator:
     enabled: true
@@ -31,6 +54,34 @@ storage:
     persistentVolume:
       volumeHandle: <volume_handle>
 
+## @param events.eventSource.enabled Whether to enable the argo events event-source
+## @param events.eventSource.name Name to give to the event-source object
+## @param events.eventSource.service.port The target port the assign to the eventsource service configuration
+## @param events.eventSource.webhook.endpoint The path to use on the endpoint
+## @param events.eventSource.webhook.method The method to use in conjunction with the eventsource
+## @param events.eventBus.enabled Whether to enable the argo events event-bus
+## @param events.eventBus.name Name to give to the event-bus object
+## @param events.eventBus.native.replicas The amount of replicas to spin-up for the event-bus setup
+## @param events.eventBus.native.auth The authentication method to be used within the event-bus setup
+## @param events.sensor.image.repository Determine from which container repository to pull the image
+## @param events.sensor.image.pullPolicy Determine when to pull an image
+## @param events.sensor.image.tag Determine which version of the image to pull from the container repository
+## @param events.sensor.enabled Whether to enable the argo events sensor used to for spinning up dsg jobs
+## @param events.sensor.name Name to give to the sensor object
+## @param events.sensor.templateName The name to be assigned to the template within the sensor
+## @param events.sensor.generateName The prefix to be used for the name when generating a dsg jobs
+## @param events.sensor.ttlSecondsAfterFinished The ttl of the job for the history after it has finished
+## @param events.sensor.restartPolicy The restart policy for the dsg job
+## @param events.sensor.volume.mountPath The default mountpath on the efs
+## @param events.sensor.variables.buildManagerUrl The url of the build-manager which is communicates with
+## @param events.sensor.variables.remoteEnv Variable to determine whether to use a remote env
+## @param events.sensor.variables.buildSpecPath The path for the buildspec on the efs volume mount
+## @param events.sensor.variables.buildOutputPath The output path to be used on the efs volume mount
+## @param events.sensor.resources.requests.cpu The requested CPU for the dsg container
+## @param events.sensor.resources.requests.memory The requested memory for the dsg container
+## @param events.sensor.resources.limits.cpu The limit of CPU for the dsg container
+## @param events.sensor.resources.limits.memory The limit of memory for the dsg container
+##
 events:
   eventSource:
     enabled: true
@@ -61,7 +112,7 @@ events:
       mountPath: /efs
     variables:
       buildManagerUrl: http://build-manager
-      remoteEnv: true
+      remoteEnv: 'true'
       buildSpecPath: /efs/input.json
       buildOutputPath: /efs/code
     resources:
@@ -72,20 +123,37 @@ events:
         cpu: 1200m
         memory: 3000Mi
 
+## @param rbac.enabled Boolean for adding the role & role-binding setup required for creating ecr dockercfg secrets
+## @param rbac.serviceAccountName String the service account name to attach to the role & role-binding setup
+##
 rbac:
   enabled: true
-  argoEventsServiceAccount: argo-events-sa
+  serviceAccountName: data-service-generator
 
+## Service account for data-service-generator to use.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+##
 serviceAccount:
+  ## @param serviceAccount.create Specifies whether a service account should be created
+  ##
   create: true
+  ## @param serviceAccount.annotations Annotations to add to the service account
+  ##
   annotations: {}
+  ## @param serviceAccount.name The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  ##
   name: ""
 
-annotations: {}
-
+## @param nodeSelector.role Node labels for pods assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
 nodeSelector:
   role: dsg
 
+## @param tolerations[0].key Toleration key for pods assignment
+## @param tolerations[0].value Toleration value for pods assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
 tolerations:
   - key: dedicated
     value: dsg
