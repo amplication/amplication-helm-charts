@@ -8,9 +8,9 @@
 
 ## Parameters
 
-### giserver parameters
+### server parameters
 
-These parameters only apply to the giserver component.
+These parameters only apply to the server component.
 
 | Name                                            | Description                                                                                                                        | Value                                                             |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
