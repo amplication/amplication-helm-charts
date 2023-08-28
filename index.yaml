@@ -3,6 +3,22 @@ entries:
   build-manager:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2023-08-28T08:54:32.777795248Z"
+    description: A Helm chart for the build-manager component of Amplication
+    digest: fd92f5dd9c3be23f38b718c59ceb0932f32a3d35f365c2e8c0675a27f066ce1f
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: build-manager
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/build-manager-2.0.2/build-manager-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-08-28T07:52:46.770005564Z"
     description: A Helm chart for the build-manager component of Amplication
     digest: 3c4cbceb0f072c4e0eb1d1595954a19755a668e728339529a669ac343a4473ac
@@ -371,6 +387,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-1.1.0/generated-service-1.1.0.tgz
     version: 1.1.0
   generated-service-admin:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2023-08-28T08:54:32.963280219Z"
+    description: A Helm chart for the generated-service-admin component of Amplication
+    digest: 95cd9673491e12c5e303ec8215080073491960cf6da12e788fc6c301f4c814bd
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: generated-service-admin
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-admin-2.0.1/generated-service-admin-2.0.1.tgz
+    version: 2.0.1
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-08-26T17:22:17.831085393Z"
@@ -1741,4 +1773,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-08-28T07:52:46.770273567Z"
+generated: "2023-08-28T08:54:32.963709058Z"
