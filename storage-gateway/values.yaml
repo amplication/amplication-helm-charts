@@ -1,79 +1,173 @@
+## @section storage-gateway parameters
+## @descriptionStart These parameters only apply to the storage-gateway component.
+## @descriptionEnd
+##
+
+## @param replicaCount Determines the amount of replicas to deploy (only consumed when autoscaling.enabled is set to false).
+##
 replicaCount: 1
 
+## @param image.repository Determine from which container repository to pull the image
+## @param image.pullPolicy Determine when to pull an image
+## @param image.tag Determine which version of the image to pull from the container repository
+##
 image:
   repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-storage-gateway
   pullPolicy: IfNotPresent
   tag: ""
 
+## @param imagePullSecrets Reference to Kubernetes secrets housing dockercfg to fetch images from private registries
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+## Example:
+## imagePullSecrets:
+##   - dockercfg-secret-name
+##
 imagePullSecrets: []
 
 ## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
 ## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
 ## @param variables.externalSecret A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)
 ## @param variables.secretStoreConfiguration When using external secrets this part of the configuration is used to point to the secret store or cluster secret store
+## Example - variables.secretStoreConfiguration:
+## variables:
+##   secretStoreConfiguration: {}
+##     kind: ClusterSecretStore
+##     name: aws-parameter-store-[environment]
+##     enabled: true
 ##
 variables:
   configmap: {}
   secret: {}
   externalSecret: {}
-  secretStoreConfiguration:
-    kind: ClusterSecretStore
-    name: ""
-    enabled: false
+  secretStoreConfiguration: {}
 
+## @param healthCheck.enabled Whether to enable the healthcheck on the deployment
+## @param healthCheck.readinessProbe A mapping of enabled & path to optionally execute readiness probes
+## @param healthCheck.livenessProbe A mapping of enabled & path to optionally execute liveness probes
+##
 healthCheck:
-  enabled: true
-  readinessProbe:
-    enabled: false
-    path: /_health/ready
-  livenessProbe:
-    enabled: false
-    path: /_health/live
+  enabled: false
+  readinessProbe: {}
+    # enabled: false
+    # path: /_health/ready
+  livenessProbe: {}
+    # enabled: false
+    # path: /_health/live
 
-volumes:
-  - name: shared-main
-    mountPath: /amplication-data
+## @param volumes Reference for the volumes that are to be attaches to the deployment - check the deployment.yaml for the added suffix
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+## Example:
+## volumes:
+##   - name: shared-main
+##     mountPath: /amplication-data
+##
+volumes: []
 
+## @param nameOverride String to fully override chart name (will maintain the release name)
+##
 nameOverride: ""
+
+## @param fullnameOverride String to fully override chart name
+##
 fullnameOverride: ""
 
+## Service account for storage-gateway to use.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+##
 serviceAccount:
+  ## @param serviceAccount.create Specifies whether a service account should be created
+  ##
   create: true
+  ## @param serviceAccount.annotations Annotations to add to the service account
+  ##
   annotations: {}
+  ## @param serviceAccount.name The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  ##
   name: ""
 
+## @param podAnnotations Map of annotations to add to the pods
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
 podAnnotations: {}
+
+## @param podSecurityContext Security context to add to the pod (overwritten by container-level settings)
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+##
 podSecurityContext: {}
+
+## @param securityContext Security context to add to the container
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+##
 securityContext: {}
 
+## @param containerPort The port number which is exposed on the container image
+##
 containerPort: 3333
 
+## @param service.type The kubernetes service type to be used
+## @param service.port.http The port exposed on the service to be used for http traffic
+## @param service.port.https The port exposed on the service to be used for https traffic
+##
 service:
   type: ClusterIP
   port:
     http: 80
     https: 443
 
+## Shared ingress configuration
+## ref: https://kubernetes.io/docs/concepts/services-networking/ingress/
+## @param ingress.enabled Enable Kubernetes ingress for ingress traffic
+## @param ingress.className Name of the ingress class to use
+## @param ingress.annotations Annotations to add on the ingress object
+## @param ingress.hosts Hosts configuration for ingress object
+## @param ingress.tls TLS configuration for ingress object
+##
 ingress:
   enabled: false
   className: ""
   annotations: {}
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
+  hosts: []
+    # - host: chart-example.local
+    #   paths:
+    #     - path: /
+    #       pathType: ImplementationSpecific
   tls: []
 
-resources: {}
+## Resources to assign to the deployment container
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+## @param resources.requests The requested CPU & memory for the container
+## @param resources.limits The CPU & memory limit for the container
+##
+resources:
+  requests: {}
+  limits: {}
 
+## Horizontal Pod Autoscaling configuration
+## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+## @param autoscaling.enabled Enable auto scaling (fallback to replicaCount if equals false)
+## @param autoscaling.minReplicas Minimal amount of replicas to scale down to
+## @param autoscaling.maxReplicas Maximum amount of replicas to scale up to
+## @param autoscaling.targetCPUUtilizationPercentage Increase and decrease the number of replicas to maintain an average % of CPU utilization
+## @param autoscaling.targetMemoryUtilizationPercentage Increase and decrease the number of replicas to maintain an average % of memory utilization
+##
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 10
   targetCPUUtilizationPercentage: 80
   targetMemoryUtilizationPercentage: 80
 
+## @param nodeSelector Node labels for pods assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
 nodeSelector: {}
+
+## @param tolerations Tolerations for pods assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
 tolerations: []
+
+## @param affinity Affinity for pods assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
 affinity: {}
