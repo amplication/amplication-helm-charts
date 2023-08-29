@@ -34,6 +34,6 @@ spec:
                   -H "Content-Type: application/json" \
                   -H "X-REQUEST-TYPE: GraphQL" \
                   -d '{{ .query }}' \
-                  https://{{ include "plugin-api.fullname" $ }}/graphql
+                  https://{{ .targetEndpoint }}/graphql
 {{- end }}
 {{- end }}
