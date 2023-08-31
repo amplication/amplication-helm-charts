@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "git-sync-manager.fullname" . }}
+  labels:
+    {{- include "git-sync-manager.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "git-sync-manager.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- if or .Values.podAnnotations .Values.variables.configmap }}
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.variables.configmap }}
+        checksum/config: {{ tpl ( .Files.Get "/configmap.yaml") . | sha256sum }} 
+      {{- end }}
+      {{- end }}
+      labels:
+        {{- include "git-sync-manager.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "git-sync-manager.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.containerPort }}
+              protocol: TCP
+          {{- if or .Values.variables.configmap .Values.variables.secret .Values.variables.externalSecret }}
+          envFrom:
+          {{- if .Values.variables.configmap }}
+            - configMapRef:
+                name: {{ include "git-sync-manager.fullname" . }}-variables
+          {{- end }}
+          {{- if or .Values.variables.secret .Values.variables.externalSecret }}
+            - secretRef:
+                name: {{ include "git-sync-manager.fullname" . }}-variables
+          {{- end }}
+          {{- end }}
+          env:
+            - name: ENVIRONMENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          {{- if .Values.healthCheck.enabled }}
+          {{- if .Values.healthCheck.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.healthCheck.readinessProbe.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.healthCheck.readinessProbe.initialDelaySeconds | default 5 }}
+            periodSeconds: {{ .Values.healthCheck.readinessProbe.periodSeconds | default 5 }}
+          {{- end }}
+          {{- if .Values.healthCheck.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.healthCheck.livenessProbe.path }}
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: {{ .Values.healthCheck.livenessProbe.initialDelaySeconds | default 60 }}
+            periodSeconds: {{ .Values.healthCheck.livenessProbe.periodSeconds | default 60 }}
+          {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.volumes }}
+          volumeMounts:
+          {{- range .Values.volumes }}
+            - name: {{ .name }}-volume
+              mountPath: {{ .mountPath }}
+          {{- end }}
+          {{- end }}
+      {{- if .Values.volumes }}
+      volumes:
+      {{- range .Values.volumes }}
+        - name: {{ .name }}-volume
+          persistentVolumeClaim:
+            claimName: {{ .name }}-pvc
+      {{- end }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

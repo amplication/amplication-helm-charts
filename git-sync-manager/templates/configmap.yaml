@@ -1,0 +1,10 @@
+{{- if .Values.variables.configmap }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "git-sync-manager.fullname" . }}-variables
+  labels:
+    {{- include "git-sync-manager.labels" . | nindent 4 }}
+data: 
+  {{- toYaml .Values.variables.configmap | nindent 2 }}
+{{- end }}
