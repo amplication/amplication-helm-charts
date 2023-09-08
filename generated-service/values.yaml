@@ -64,7 +64,7 @@ cronJob:
     query: '{"query": ""}'
     targetEndpoint: "generated-service"
   rest:
-    enabled: true
+    enabled: false
     schedule: "*/10 * * * *"
     history:
       successful: 2
