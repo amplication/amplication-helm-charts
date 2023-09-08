@@ -33,14 +33,44 @@ variables:
   configmap: {}
   secret: {}
   externalSecret: {}
-  secretStoreConfiguration:
-    kind: ClusterSecretStore
-    name: ""
-    enabled: false
+  secretStoreConfiguration: {}
+    # kind: ClusterSecretStore
+    # name: ""
+    # enabled: false
 
-secretStoreConfiguration:
-  kind: SecretStore
-  name: aws-parameter-store-sandbox
+## @param cronJob.graphql.enabled Whether to enable the graphql cronjob
+## @param cronJob.graphql.schedule The unix style cronjob timer
+## @param cronJob.graphql.history.successful Determine how many successful jobs to keep
+## @param cronJob.graphql.history.failed Determine how many failed jobs to keep
+## @param cronJob.graphql.annotations Annotations to be added to the cronjob
+## @param cronJob.graphql.query The graphql query to inject to the cronjob
+## @param cronJob.graphql.targetEndpoint The endpoint to target the graphql request to
+## @param cronJob.rest.enabled Whether to enable the rest cronjob
+## @param cronJob.rest.schedule The unix style cronjob timer
+## @param cronJob.rest.history.successful Determine how many successful jobs to keep
+## @param cronJob.rest.history.failed Determine how many failed jobs to keep
+## @param cronJob.rest.annotations Annotations to be added to the cronjob
+## @param cronJob.rest.requestType The request type for the rest request e.g., POST, GET
+## @param cronJob.rest.targetEndpoint The endpoint on which to target the curl request to
+cronJob:
+  graphql:
+    enabled: false
+    schedule: "*/10 * * * *"
+    history:
+      successful: 2
+      failed: 2
+    annotations: {}
+    query: '{"query": ""}'
+    targetEndpoint: "generated-service"
+  rest:
+    enabled: false
+    schedule: "*/10 * * * *"
+    history:
+      successful: 2
+      failed: 2
+    annotations: {}
+    requestType: "POST"
+    targetEndpoint: "generated-service"
 
 ## @param healthCheck.enabled Whether to enable the healthcheck on the deployment
 ## @param healthCheck.readinessProbe A mapping of enabled & path to optionally execute readiness probes
