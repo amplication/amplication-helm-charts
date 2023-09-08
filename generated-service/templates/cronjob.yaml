@@ -71,9 +71,10 @@ spec:
               args:
                 - |
                   curl '{{ .targetEndpoint }}' \
-                  -X '{{ .requestType }}' \
-                  -H 'Cache-Control: no-cache' \
-                  -H 'Connection: keep-alive' \
-                  -H 'Content-Length: 0'
+                    -X '{{ .requestType }}' \
+                    -H 'Cache-Control: no-cache' \
+                    -H 'Connection: keep-alive' \
+                    -H "Content-Type: application/json" \
+                    -d '{{ .requestBody }}'  
 {{- end }}
 {{- end }}

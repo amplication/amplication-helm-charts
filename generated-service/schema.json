@@ -112,7 +112,7 @@
                         "enabled": {
                             "type": "boolean",
                             "description": "Whether to enable the rest cronjob",
-                            "default": false
+                            "default": true
                         },
                         "schedule": {
                             "type": "string",
@@ -148,6 +148,11 @@
                             "type": "string",
                             "description": "The endpoint on which to target the curl request to",
                             "default": "generated-service"
+                        },
+                        "requestBody": {
+                            "type": "string",
+                            "description": "The request body to pass with the request",
+                            "default": "{}"
                         }
                     }
                 }
