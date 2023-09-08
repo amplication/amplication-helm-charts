@@ -1,0 +1,80 @@
+{{- if .Values.cronJob.graphql.enabled }}
+{{- with .Values.cronJob.graphql }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "generated-service.fullname" $ }}-graphql
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+        {{- with .annotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        spec:
+          serviceAccountName: {{ include "generated-service.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: {{ $.Chart.Name }}-cronjob
+              imagePullPolicy: IfNotPresent
+              image: curlimages/curl:7.87.0
+              command:
+                - /bin/sh
+                - -c
+              args:
+                - |
+                  curl -X POST \
+                  -H "Content-Type: application/json" \
+                  -H "X-REQUEST-TYPE: GraphQL" \
+                  -d '{{ .query }}' \
+                  https://{{ .targetEndpoint }}/graphql
+{{- end }}
+{{- end }}
+---
+{{- if .Values.cronJob.rest.enabled }}
+{{- with .Values.cronJob.rest }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "generated-service.fullname" $ }}-rest
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+        {{- with .annotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        spec:
+          serviceAccountName: {{ include "generated-service.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: {{ $.Chart.Name }}-cronjob
+              imagePullPolicy: IfNotPresent
+              image: curlimages/curl:7.87.0
+              command:
+                - /bin/sh
+                - -c
+              args:
+                - |
+                  curl '{{ .targetEndpoint }}' \
+                    -X '{{ .requestType }}' \
+                    -H 'Cache-Control: no-cache' \
+                    -H 'Connection: keep-alive' \
+                    -H "Content-Type: application/json" \
+                    -d '{{ .requestBody }}'  
+{{- end }}
+{{- end }}
