@@ -102,6 +102,8 @@ spec:
           serviceAccountName: {{ include "generated-service.serviceAccountName" $ }}
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
+          iamgePullSecrets:
+            - name:  {{ $.Values.imagePullSecrets }}
           containers:
             - name: {{ $.Chart.Name }}-generic-cronjob
               imagePullPolicy: {{ .image.imagePullPolicy }}
