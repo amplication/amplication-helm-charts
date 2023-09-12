@@ -22,7 +22,7 @@ spec:
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
           containers:
-            - name: {{ $.Chart.Name }}-cronjob
+            - name: {{ $.Chart.Name }}-graphql-cronjob
               imagePullPolicy: IfNotPresent
               image: curlimages/curl:7.87.0
               command:
@@ -62,7 +62,7 @@ spec:
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
           containers:
-            - name: {{ $.Chart.Name }}-cronjob
+            - name: {{ $.Chart.Name }}-rest-cronjob
               imagePullPolicy: IfNotPresent
               image: curlimages/curl:7.87.0
               command:
@@ -76,5 +76,46 @@ spec:
                     -H 'Connection: keep-alive' \
                     -H "Content-Type: application/json" \
                     -d '{{ .requestBody }}'  
+{{- end }}
+{{- end }}
+---
+{{- if .Values.cronJob.generic.enabled }}
+{{- with .Values.cronJob.generic }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "generated-service.fullname" $ }}-generic
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+        {{- with .annotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        spec:
+          serviceAccountName: {{ include "generated-service.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: {{ $.Chart.Name }}-generic-cronjob
+              imagePullPolicy: {{ .image.imagePullPolicy }}
+              image: {{ .image.repository }}:{{ .image.tag | default $.Chart.AppVersion }}
+              {{- if or $.Values.variables.configmap $.Values.variables.secret $.Values.variables.externalSecret }}
+              envFrom:
+              {{- if $.Values.variables.configmap }}
+                - configMapRef:
+                    name: {{ include "generated-service.fullname" $ }}-variables
+              {{- end }}
+              {{- if or $.Values.variables.secret $.Values.variables.externalSecret }}
+                - secretRef:
+                    name: {{ include "generated-service.fullname" $ }}-variables
+              {{- end }}          
+              {{- end }}
 {{- end }}
 {{- end }}
