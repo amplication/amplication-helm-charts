@@ -1,0 +1,87 @@
+## @section analytics parameters
+## @descriptionStart These parameters only apply to the analytics component.
+## @descriptionEnd
+##
+
+## @param variables.configmap A mapping of key:value to be add to the configmap object (to be used as environment variables on the deployment)
+## @param variables.secret A mapping of key:value to be add to the secret object (to be used as environment variables on the deployment)
+## @param variables.externalSecret A mapping of key:values to be added to the external secrets object (turned into a regular secret by the external secrets operator)
+## @param variables.secretStoreConfiguration When using external secrets this part of the configuration is used to point to the secret store or cluster secret store
+##
+variables:
+  configmap: {}
+  secret: {}
+  externalSecret: {}
+  secretStoreConfiguration: {}
+    # kind: ClusterSecretStore
+    # name: ""
+    # enabled: false
+
+## @param cronJob.generic.enabled Whether to enable the generic cronjob
+## @param cronJob.generic.schedule The unix style cronjob timer
+## @param cronJob.generic.history.successful Determine how many successful jobs to keep
+## @param cronJob.generic.history.failed Determine how many failed jobs to keep
+## @param cronJob.generic.annotations Annotations to be added to the cronjob
+## @param cronJob.generic.imagePullSecrets Reference to Kubernetes secrets housing dockercfg to fetch images from private registries
+## @param cronJob.generic.image.repository Determine from which container repository to pull the image for the generic cronjob
+## @param cronJob.generic.image.pullPolicy Determine when to pull an image for the generic cronjob
+## @param cronJob.generic.image.tag Determine which version of the image to pull from the container repository for the generic cronjob
+cronJob:
+  generic:
+    enabled: false
+    schedule: "*/10 * * * *"
+    history:
+      successful: 2
+      failed: 2
+    annotations: {}
+    imagePullSecrets: []
+    image:
+      repository: "439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-analytics"
+      pullPolicy: IfNotPresent
+      tag: ""
+
+## @param nameOverride String to fully override chart name (will maintain the release name)
+##
+nameOverride: ""
+
+## @param fullnameOverride String to fully override chart name
+##
+fullnameOverride: ""
+
+## Service account for analytics to use.
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+##
+serviceAccount:
+  ## @param serviceAccount.create Specifies whether a service account should be created
+  ##
+  create: true
+  ## @param serviceAccount.annotations Annotations to add to the service account
+  ##
+  annotations: {}
+  ## @param serviceAccount.name The name of the service account to use. If not set and create is true, a name is generated using the fullname template
+  ##
+  name: ""
+
+## Resources to assign to the deployment container
+## ref: https://kubernetes.io/docs/user-guide/compute-resources/
+## @param resources.requests The requested CPU & memory for the container
+## @param resources.limits The CPU & memory limit for the container
+##
+resources:
+  requests: {}
+  limits: {}
+
+## @param nodeSelector Node labels for pods assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+
+## @param tolerations Tolerations for pods assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## @param affinity Affinity for pods assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
