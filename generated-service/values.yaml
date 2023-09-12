@@ -82,12 +82,13 @@ cronJob:
     targetEndpoint: "generated-service"
     requestBody: '{}'
   generic:
-    enabled: false
+    enabled: true
     schedule: "*/10 * * * *"
     history:
       successful: 2
       failed: 2
     annotations: {}
+    imagePullSecrets: []
     image:
       repository: "439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-generated-service"
       pullPolicy: IfNotPresent
