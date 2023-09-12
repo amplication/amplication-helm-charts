@@ -4,6 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
+      "readme:analytics": "readme-generator --values analytics/values.yaml --readme analytics/README.md --schema analytics/schema.json",
       "readme:build-manager": "readme-generator --values build-manager/values.yaml --readme build-manager/README.md --schema build-manager/schema.json",
       "readme:client": "readme-generator --values client/values.yaml --readme client/README.md --schema client/schema.json",
       "readme:data-service-generator": "readme-generator --values data-service-generator/values.yaml --readme data-service-generator/README.md --schema data-service-generator/schema.json",
