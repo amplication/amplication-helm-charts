@@ -53,14 +53,6 @@ variables:
 ## @param cronJob.rest.requestType The request type for the rest request e.g., POST, GET
 ## @param cronJob.rest.targetEndpoint The endpoint on which to target the curl request to
 ## @param cronJob.rest.requestBody The request body to pass with the request
-## @param cronJob.generic.enabled Whether to enable the generic cronjob
-## @param cronJob.generic.schedule The unix style cronjob timer
-## @param cronJob.generic.history.successful Determine how many successful jobs to keep
-## @param cronJob.generic.history.failed Determine how many failed jobs to keep
-## @param cronJob.generic.annotations Annotations to be added to the cronjob
-## @param cronJob.generic.image.repository Determine from which container repository to pull the image for the generic cronjob
-## @param cronJob.generic.image.pullPolicy Determine when to pull an image for the generic cronjob
-## @param cronJob.generic.image.tag Determine which version of the image to pull from the container repository for the generic cronjob
 cronJob:
   graphql:
     enabled: false
@@ -81,18 +73,6 @@ cronJob:
     requestType: "POST"
     targetEndpoint: "generated-service"
     requestBody: '{}'
-  generic:
-    enabled: true
-    schedule: "*/10 * * * *"
-    history:
-      successful: 2
-      failed: 2
-    annotations: {}
-    imagePullSecrets: []
-    image:
-      repository: "439403303254.dkr.ecr.us-east-1.amazonaws.com/amplication-generated-service"
-      pullPolicy: IfNotPresent
-      tag: ""
 
 ## @param healthCheck.enabled Whether to enable the healthcheck on the deployment
 ## @param healthCheck.readinessProbe A mapping of enabled & path to optionally execute readiness probes
