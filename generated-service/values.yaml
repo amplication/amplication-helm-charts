@@ -72,7 +72,7 @@ cronJob:
     annotations: {}
     requestType: "POST"
     targetEndpoint: "generated-service"
-    requestBody: '{}'
+    requestBody: "{}"
 
 ## @param healthCheck.enabled Whether to enable the healthcheck on the deployment
 ## @param healthCheck.readinessProbe A mapping of enabled & path to optionally execute readiness probes

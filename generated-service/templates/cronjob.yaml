@@ -74,7 +74,7 @@ spec:
                     -X '{{ .requestType }}' \
                     -H 'Cache-Control: no-cache' \
                     -H 'Connection: keep-alive' \
-                    -H "Content-Type: application/json" \
-                    -d '{{ .requestBody }}'  
+                    -H 'Content-Type: application/json' \
+                    -d '{{ .requestBody | quote}}'  
 {{- end }}
 {{- end }}
