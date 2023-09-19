@@ -62,7 +62,7 @@ cronJob:
       failed: 2
     annotations: {}
     query: '{"query": ""}'
-    targetEndpoint: "generated-service"
+    targetEndpoint: "https://generated-service"
   rest:
     enabled: false
     schedule: "*/10 * * * *"
@@ -71,7 +71,7 @@ cronJob:
       failed: 2
     annotations: {}
     requestType: "POST"
-    targetEndpoint: "generated-service"
+    targetEndpoint: "http://generated-service"
     requestBody: "{}"
 
 ## @param healthCheck.enabled Whether to enable the healthcheck on the deployment

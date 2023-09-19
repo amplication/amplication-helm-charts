@@ -30,7 +30,7 @@ spec:
                 - -c
               args:
                 - |
-                  curl "https://{{ .targetEndpoint }}/graphql" \
+                  curl "{{ .targetEndpoint }}/graphql" \
                     -X "POST" \
                     -H "Content-Type: application/json" \
                     -H "X-REQUEST-TYPE: GraphQL" \
@@ -71,7 +71,7 @@ spec:
                 - -c
               args:
                 - |
-                  curl "https://{{ .targetEndpoint }}" \
+                  curl "{{ .targetEndpoint }}" \
                     -X "{{ .requestType }}" \
                     -H "Cache-Control: no-cache" \
                     -H "Connection: keep-alive" \
