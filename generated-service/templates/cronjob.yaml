@@ -30,11 +30,12 @@ spec:
                 - -c
               args:
                 - |
-                  curl -X POST \
-                  -H "Content-Type: application/json" \
-                  -H "X-REQUEST-TYPE: GraphQL" \
-                  -d '{{ .query }}' \
-                  https://{{ .targetEndpoint }}/graphql
+                  curl "https://{{ .targetEndpoint }}/graphql" \
+                    -X "POST" \
+                    -H "Content-Type: application/json" \
+                    -H "X-REQUEST-TYPE: GraphQL" \
+                    -d "{{ .query }}"
+                  
 {{- end }}
 {{- end }}
 ---
@@ -70,11 +71,11 @@ spec:
                 - -c
               args:
                 - |
-                  curl '{{ .targetEndpoint }}' \
-                    -X '{{ .requestType }}' \
-                    -H 'Cache-Control: no-cache' \
-                    -H 'Connection: keep-alive' \
-                    -H 'Content-Type: application/json' \
-                    -d '{{ .requestBody | quote}}'  
+                  curl "https://{{ .targetEndpoint }}" \
+                    -X "{{ .requestType }}" \
+                    -H "Cache-Control: no-cache" \
+                    -H "Connection: keep-alive" \
+                    -H "Content-Type: application/json" \
+                    -d "{{ .requestBody }}"  
 {{- end }}
 {{- end }}
