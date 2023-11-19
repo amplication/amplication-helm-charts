@@ -86,7 +86,7 @@ spec:
               operation: append
             - src:
                 dependencyName: request
-                dataKey: body.containerImageTag
+                dataKey: body.codeGeneratorVersion
                 value: {{ .Values.events.sensor.image.tag }}
               dest: spec.template.spec.containers.0.image
               operation: append
