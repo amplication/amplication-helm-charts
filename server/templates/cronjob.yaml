@@ -36,7 +36,7 @@ spec:
                   curl "{{ .targetEndpoint }}/graphql" \
                     -X "POST" \
                     -H "Content-Type: application/json" \
-                    -H "x-cron-secret: ${CRON_TOKEN}" \
+                    -H "x-cron-secret: ${CRON_SECRET_KEY}" \
                     -H "X-REQUEST-TYPE: GraphQL" \
                     -d "{{ .query }}"
 {{- end }}
