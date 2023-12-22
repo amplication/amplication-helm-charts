@@ -25,6 +25,9 @@ spec:
             - name: {{ $.Chart.Name }}-graphql-cronjob
               imagePullPolicy: IfNotPresent
               image: curlimages/curl:8.5.0
+              envFrom:
+                - secretRef:
+                    name: {{ include "server.fullname" . }}-variables
               command:
                 - /bin/sh
                 - -c
@@ -33,8 +36,8 @@ spec:
                   curl "{{ .targetEndpoint }}/graphql" \
                     -X "POST" \
                     -H "Content-Type: application/json" \
+                    -H "x-cron-secret: ${CRON_TOKEN}" \
                     -H "X-REQUEST-TYPE: GraphQL" \
                     -d "{{ .query }}"
-                  
 {{- end }}
 {{- end }}
