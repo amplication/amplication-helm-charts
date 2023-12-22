@@ -1,0 +1,40 @@
+{{- if .Values.cronJob.graphql.enabled }}
+{{- with .Values.cronJob.graphql }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "server.fullname" $ }}-graphql
+spec:
+  schedule: "{{ .schedule }}"
+  successfulJobsHistoryLimit: {{ .history.successful }}
+  failedJobsHistoryLimit: {{ .history.failed }}
+  jobTemplate:
+    spec:
+      backoffLimit: 4
+      template:
+        metadata:
+        {{- with .annotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        spec:
+          serviceAccountName: {{ include "server.serviceAccountName" $ }}
+          terminationGracePeriodSeconds: 0
+          restartPolicy: Never
+          containers:
+            - name: {{ $.Chart.Name }}-graphql-cronjob
+              imagePullPolicy: IfNotPresent
+              image: curlimages/curl:8.5.0
+              command:
+                - /bin/sh
+                - -c
+              args:
+                - |
+                  curl "{{ .targetEndpoint }}/graphql" \
+                    -X "POST" \
+                    -H "Content-Type: application/json" \
+                    -H "X-REQUEST-TYPE: GraphQL" \
+                    -d "{{ .query }}"
+                  
+{{- end }}
+{{- end }}

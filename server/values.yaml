@@ -155,6 +155,25 @@ resources:
   requests: {}
   limits: {}
 
+
+## @param cronJob.graphql.enabled Whether to enable the graphql cronjob
+## @param cronJob.graphql.schedule The unix style cronjob timer
+## @param cronJob.graphql.history.successful Determine how many successful jobs to keep
+## @param cronJob.graphql.history.failed Determine how many failed jobs to keep
+## @param cronJob.graphql.annotations Annotations to be added to the cronjob
+## @param cronJob.graphql.query The graphql query to inject to the cronjob
+## @param cronJob.graphql.targetEndpoint The endpoint to target the graphql request to
+cronJob:
+  graphql:
+    enabled: false
+    schedule: "0 0 1 * *"
+    history:
+      successful: 2
+      failed: 2
+    annotations: {}
+    query: '{"query": ""}'
+    targetEndpoint: "https://server"
+
 ## Horizontal Pod Autoscaling configuration
 ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
 ## @param autoscaling.enabled Enable auto scaling (fallback to replicaCount if equals false)
