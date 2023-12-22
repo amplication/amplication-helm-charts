@@ -27,7 +27,7 @@ spec:
               image: curlimages/curl:8.5.0
               envFrom:
                 - secretRef:
-                    name: {{ include "server.fullname" . }}-variables
+                    name: {{ include "server.fullname" $ }}-variables
               command:
                 - /bin/sh
                 - -c
