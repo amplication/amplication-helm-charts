@@ -1,0 +1,34 @@
+image:
+  repository: public.ecr.aws/aws-observability/aws-for-fluent-bits
+  pullPolicy: IfNotPresent
+  tag: stable
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "fluent-bit"
+
+configmap:
+  info:
+    region: "us-east-1"
+    clusterName: "amplication-environment"
+    read:
+      head: "Off"
+      tail: "On"
+    http:
+      port: "2020"
+      server: "Off"
+  config: []
+
+serviceAccount:
+  name: fluent-bit
+  create: true
+  automount: true
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::369232204790:role/fluent-bit
+
+podAnnotations: {}
+podLabels: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
