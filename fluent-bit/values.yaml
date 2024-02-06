@@ -1,5 +1,5 @@
 image:
-  repository: public.ecr.aws/aws-observability/aws-for-fluent-bits
+  repository: public.ecr.aws/aws-observability/aws-for-fluent-bit
   pullPolicy: IfNotPresent
   tag: stable
 
