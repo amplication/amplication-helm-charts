@@ -420,6 +420,16 @@ entries:
     version: 1.0.0
   fluent-bit:
   - apiVersion: v2
+    appVersion: stable
+    created: "2024-02-06T14:51:33.620394242Z"
+    description: A Helm chart for Kubernetes
+    digest: fde23690fc314234f11b2566caa10a4fa52187d740c41c1c609ce3dfe4184a5a
+    name: fluent-bit
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/fluent-bit-0.1.1/fluent-bit-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2024-02-06T13:50:42.012097586Z"
     description: A Helm chart for Kubernetes
@@ -2347,4 +2357,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2024-02-06T13:50:42.012389202Z"
+generated: "2024-02-06T14:51:33.620701373Z"
