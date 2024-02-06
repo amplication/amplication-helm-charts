@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-cluster-info
+  namespace: observability
+data:
+  cluster.name: "{{ .Values.configmap.info.clusterName }}"
+  logs.region: "{{ .Values.configmap.info.region }}"
+  http.server: "{{ .Values.configmap.info.http.server }}"
+  http.port: "{{ .Values.configmap.info.http.port }}"
+  read.head: "{{ .Values.configmap.info.read.head }}"
+  read.tail: "{{ .Values.configmap.info.read.tail }}"
