@@ -17,7 +17,7 @@ configmap:
     http:
       port: "2020"
       server: "Off"
-  config:
+  config: []
 
 serviceAccount:
   name: fluent-bit
