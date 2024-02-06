@@ -418,6 +418,17 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/data-service-generator-1.0.0/data-service-generator-1.0.0.tgz
     version: 1.0.0
+  fluent-bit:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-02-06T13:50:42.012097586Z"
+    description: A Helm chart for Kubernetes
+    digest: f459196c3aab6b8dfd3ea5b56f4d5c01ea831d6d00d3a552b1424061f9442e28
+    name: fluent-bit
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/fluent-bit-0.1.0/fluent-bit-0.1.0.tgz
+    version: 0.1.0
   generated-service:
   - apiVersion: v2
     appVersion: 0.0.0
@@ -2336,4 +2347,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2023-12-22T10:56:56.742142909Z"
+generated: "2024-02-06T13:50:42.012389202Z"
