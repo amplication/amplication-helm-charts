@@ -21,39 +21,39 @@ spec:
         {{- include "fluent-bit.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name: fluent-bit
+      - name: {{ include "fluent-bit.fullname" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: logs.region
             - name: CLUSTER_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: cluster.name
             - name: HTTP_SERVER
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: http.server
             - name: HTTP_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: http.port
             - name: READ_FROM_HEAD
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: read.head
             - name: READ_FROM_TAIL
               valueFrom:
                 configMapKeyRef:
-                  name: fluent-bit-cluster-info
+                  name: {{ include "fluent-bit.fullname" . }}-cluster-info
                   key: read.tail
             - name: HOST_NAME
               valueFrom:
@@ -81,7 +81,7 @@ spec:
         - name: varlibdockercontainers
           mountPath: /var/lib/docker/containers
           readOnly: true
-        - name: fluent-bit-config
+        - name: {{ include "fluent-bit.fullname" . }}-config
           mountPath: /fluent-bit/etc/
         - name: runlogjournal
           mountPath: /run/log/journal
@@ -102,9 +102,9 @@ spec:
       - name: varlibdockercontainers
         hostPath:
           path: /var/lib/docker/containers
-      - name: fluent-bit-config
+      - name: {{ include "fluent-bit.fullname" . }}-config
         configMap:
-          name: fluent-bit-config
+          name: {{ include "fluent-bit.fullname" . }}-config
       - name: runlogjournal
         hostPath:
           path: /run/log/journal

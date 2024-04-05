@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fluent-bit-cluster-info
+  name: {{ include "fluent-bit.fullname" . }}-cluster-info
   namespace: observability
 data:
   cluster.name: "{{ .Values.configmap.info.clusterName }}"
