@@ -112,3 +112,7 @@ spec:
         hostPath:
           path: /var/log/dmesg
       serviceAccountName: {{ include "fluent-bit.serviceAccountName" . }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
