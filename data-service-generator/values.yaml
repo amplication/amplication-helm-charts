@@ -104,9 +104,10 @@ events:
       auth: token
   sensor:
     image:
-      repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/data-service-generator
+      repository: 439403303254.dkr.ecr.us-east-1.amazonaws.com/
       pullPolicy: Always
-      tag: ""
+      fallbackTag: ""
+      fallbackName: "data-service-generator"
     enabled: true
     name: dsg-job-webhook
     templateName: dsg-job-webhook-trigger

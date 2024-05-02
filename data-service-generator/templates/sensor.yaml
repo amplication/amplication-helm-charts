@@ -81,13 +81,19 @@ spec:
               dest: spec.template.spec.containers.0.env.1.value
             - src:
                 dependencyName: request
+                dataKey: body.codeGeneratorName
+                value: {{ .Values.events.sensor.image.fallbackName }}
+              dest: spec.template.spec.containers.0.image
+              operation: append
+            - src:
+                dependencyName: request
                 value: ":"
               dest: spec.template.spec.containers.0.image
               operation: append
             - src:
                 dependencyName: request
                 dataKey: body.codeGeneratorVersion
-                value: {{ .Values.events.sensor.image.tag }}
+                value: {{ .Values.events.sensor.image.fallbackTag }}
               dest: spec.template.spec.containers.0.image
               operation: append
 {{- end }}
