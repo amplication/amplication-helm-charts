@@ -166,6 +166,17 @@ resources:
   requests: {}
   limits: {}
 
+## @param volumes Reference for the volumes that are to be attaches to the deployment - check the deployment.yaml for the added suffix
+## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+## Example:
+## volumes:
+##   - name: data-service-generator-main
+##     mountPath: /build-artifacts
+##   - name: data-service-generator-dsg
+##     mountPath: /dsg-jobs
+##
+volumes: []
+
 ## Horizontal Pod Autoscaling configuration
 ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
 ## @param autoscaling.enabled Enable auto scaling (fallback to replicaCount if equals false)
