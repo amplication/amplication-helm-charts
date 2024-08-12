@@ -498,6 +498,22 @@ entries:
   generated-service:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-08-12T18:56:10.886189194Z"
+    description: A Helm chart for the generated-service component of Amplication
+    digest: 97316a520a2f538a6a9df749946230d2abd57b22393abed30db291170587c175
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: generated-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-2.0.11/generated-service-2.0.11.tgz
+    version: 2.0.11
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-09-19T11:51:39.297939975Z"
     description: A Helm chart for the generated-service component of Amplication
     digest: 191b78901930ce6b3e7e3e621d3976f3130ea8d76c7a880320a07131316d0508
@@ -2413,4 +2429,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2024-05-02T10:53:18.183934178Z"
+generated: "2024-08-12T18:56:10.886585492Z"
