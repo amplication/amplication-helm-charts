@@ -162,6 +162,10 @@ strategy:
     maxUnavailable: 0
   type: RollingUpdate
 
+## Configuration for specifying a differenct command to execute schema migrations
+initContainer:
+  args: "npx prisma@5.10.2 migrate deploy --schema prisma/schema.prisma"
+
 ## @param cronJob.graphql.enabled Whether to enable the graphql cronjob
 ## @param cronJob.graphql.schedule The unix style cronjob timer
 ## @param cronJob.graphql.history.successful Determine how many successful jobs to keep
