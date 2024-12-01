@@ -166,6 +166,13 @@ resources:
   requests: {}
   limits: {}
 
+## Configuration for deployment update strategy
+strategy:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  type: RollingUpdate
+
 ## @param volumes Reference for the volumes that are to be attaches to the deployment - check the deployment.yaml for the added suffix
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 ## Example:
