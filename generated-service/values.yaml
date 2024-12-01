@@ -173,6 +173,10 @@ strategy:
     maxUnavailable: 0
   type: RollingUpdate
 
+## Configuration for specifying a differenct command to execute schema migrations
+initContainer:
+  args: "npx prisma@5.10.2 migrate deploy --schema prisma/schema.prisma"
+
 ## @param volumes Reference for the volumes that are to be attaches to the deployment - check the deployment.yaml for the added suffix
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 ## Example:

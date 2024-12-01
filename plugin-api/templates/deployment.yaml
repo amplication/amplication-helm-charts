@@ -39,7 +39,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/sh"]
-          args: ["-c", "npx prisma migrate deploy --schema prisma/schema.prisma", ";", "exit"]
+          args: ["-c", {{ .Values.initContainer.args | quote }}, ";", "exit"]
           env:
             - name: DB_URL
               valueFrom:
