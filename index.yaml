@@ -498,6 +498,22 @@ entries:
   generated-service:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-12-01T19:44:16.697087128Z"
+    description: A Helm chart for the generated-service component of Amplication
+    digest: ba7fcdcaa94ce971e26345c781ff1fa55f11d67508177fb2be1c49f83d508b5c
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: generated-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-2.0.13/generated-service-2.0.13.tgz
+    version: 2.0.13
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-12-01T17:44:40.601463025Z"
     description: A Helm chart for the generated-service component of Amplication
     digest: 0e403fe7728fd3e9447247dd7fca5903c6d380051b1430abe303c0119f54c57b
@@ -1806,6 +1822,22 @@ entries:
   plugin-api:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-12-01T19:44:16.802914553Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 3d054f82f40cb9a1f20acf8be7f79fe288ab76e4700d2d1a94870a08d9d23132
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.11/plugin-api-2.0.11.tgz
+    version: 2.0.11
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-12-01T17:44:40.878489596Z"
     description: A Helm chart for the plugin-api component of Amplication
     digest: 99ead34099193ab70d58b33d5380d2b33dca167df2dd4a6fa5b47f8aa25b01f4
@@ -2509,4 +2541,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2024-12-01T19:37:38.564247109Z"
+generated: "2024-12-01T19:44:16.80333597Z"
