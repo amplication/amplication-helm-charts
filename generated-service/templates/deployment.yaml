@@ -11,6 +11,8 @@ spec:
   selector:
     matchLabels:
       {{- include "generated-service.selectorLabels" . | nindent 6 }}
+  strategy:
+{{ toYaml .Values.strategy | indent 4 }}
   template:
     metadata:
       {{- if or .Values.podAnnotations .Values.variables.configmap }}

@@ -141,6 +141,13 @@ resources:
   requests: {}
   limits: {}
 
+## Configuration for deployment update strategy
+strategy:
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+  type: RollingUpdate
+
 ## Horizontal Pod Autoscaling configuration
 ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
 ## @param autoscaling.enabled Enable auto scaling (fallback to replicaCount if equals false)
