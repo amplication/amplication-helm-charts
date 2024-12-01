@@ -498,6 +498,22 @@ entries:
   generated-service:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-12-01T17:44:40.601463025Z"
+    description: A Helm chart for the generated-service component of Amplication
+    digest: 0e403fe7728fd3e9447247dd7fca5903c6d380051b1430abe303c0119f54c57b
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: generated-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-2.0.12/generated-service-2.0.12.tgz
+    version: 2.0.12
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-08-12T18:56:10.886189194Z"
     description: A Helm chart for the generated-service component of Amplication
     digest: 97316a520a2f538a6a9df749946230d2abd57b22393abed30db291170587c175
@@ -1141,6 +1157,22 @@ entries:
   git-sync-manager:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-12-01T17:44:40.738871249Z"
+    description: A Helm chart for the git-sync-manager component of Amplication
+    digest: 3d3b6e92d8587f8739cd08207f36ae41a2ea7dcd50f692fca3fcb00c599e093b
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: git-sync-manager
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-sync-manager-2.0.3/git-sync-manager-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-09-14T12:57:18.265277838Z"
     description: A Helm chart for the git-sync-manager component of Amplication
     digest: f4589f01f0f4aff72024070117e64cba57f64a8635cde20393fa5eb464defdfa
@@ -1774,6 +1806,22 @@ entries:
   plugin-api:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2024-12-01T17:44:40.878489596Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 99ead34099193ab70d58b33d5380d2b33dca167df2dd4a6fa5b47f8aa25b01f4
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.10/plugin-api-2.0.10.tgz
+    version: 2.0.10
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-09-14T12:57:18.431634192Z"
     description: A Helm chart for the plugin-api component of Amplication
     digest: b1891a8b6a5101e257ed6069d03304382b0f8fe4b5ca3459cb73ee8d4bbe1bc2
@@ -1991,6 +2039,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-1.0.0/plugin-api-1.0.0.tgz
     version: 1.0.0
   server:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2024-12-01T17:44:41.016846042Z"
+    description: A Helm chart for the server component of Amplication
+    digest: 66dcf34e45e9a67b65020a0dce9ac6ae7afccb048465f23d66d906dcfae877b5
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: server
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/server-2.0.10/server-2.0.10.tgz
+    version: 2.0.10
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2023-12-22T10:56:56.741865041Z"
@@ -2429,4 +2493,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2024-08-12T18:56:10.886585492Z"
+generated: "2024-12-01T17:44:41.017308287Z"
