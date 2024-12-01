@@ -158,6 +158,10 @@ strategy:
     maxUnavailable: 0
   type: RollingUpdate
 
+## Configuration for specifying a differenct command to execute schema migrations
+initContainer:
+  args: "npx prisma@5.10.2 migrate deploy --schema prisma/schema.prisma"
+
 ## Horizontal Pod Autoscaling configuration
 ## ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
 ## @param autoscaling.enabled Enable auto scaling (fallback to replicaCount if equals false)
