@@ -6,7 +6,7 @@ metadata:
 data:
   fluent-bit.conf: |
     [SERVICE]
-        Flush                     5
+        Flush                     60
         Log_Level                 info
         Daemon                    off
         Parsers_File              parsers.conf
@@ -35,7 +35,7 @@ data:
         DB                  /var/fluent-bit/state/flb_container.db
         Mem_Buf_Limit       50MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Rotate_Wait         30
         storage.type        filesystem
         Read_from_Head      ${READ_FROM_HEAD}
@@ -48,7 +48,7 @@ data:
         DB                  /var/fluent-bit/state/flb_log.db
         Mem_Buf_Limit       5MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Read_from_Head      ${READ_FROM_HEAD}
 
     [INPUT]
@@ -62,7 +62,7 @@ data:
         DB                  /var/fluent-bit/state/flb_cwagent.db
         Mem_Buf_Limit       5MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Read_from_Head      ${READ_FROM_HEAD}
 
     [FILTER]
@@ -115,7 +115,7 @@ data:
         DB                  /var/fluent-bit/state/flb_dataplane_tail.db
         Mem_Buf_Limit       50MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Rotate_Wait         30
         storage.type        filesystem
         Read_from_Head      ${READ_FROM_HEAD}
@@ -151,7 +151,7 @@ data:
         DB                  /var/fluent-bit/state/flb_dmesg.db
         Mem_Buf_Limit       5MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Read_from_Head      ${READ_FROM_HEAD}
 
     [INPUT]
@@ -162,7 +162,7 @@ data:
         DB                  /var/fluent-bit/state/flb_messages.db
         Mem_Buf_Limit       5MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Read_from_Head      ${READ_FROM_HEAD}
 
     [INPUT]
@@ -173,7 +173,7 @@ data:
         DB                  /var/fluent-bit/state/flb_secure.db
         Mem_Buf_Limit       5MB
         Skip_Long_Lines     On
-        Refresh_Interval    10
+        Refresh_Interval    300
         Read_from_Head      ${READ_FROM_HEAD}
 
     [FILTER]
