@@ -19,6 +19,12 @@ configmap:
       server: "Off"
   config: []
 
+namespaceFilter:
+  enabled: false
+  namespaces: []
+    # - sandbox
+    # - sandbox-dsg
+
 serviceAccount:
   name: fluent-bit
   create: true
