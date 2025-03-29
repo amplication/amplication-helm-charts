@@ -86,6 +86,7 @@ data:
         Key_Name            message
 
     {{- if and .Values.namespaceFilter.enabled .Values.namespaceFilter.namespaces }}
+
     [FILTER]
         Name                grep
         Match               application.*
