@@ -22,8 +22,9 @@ configmap:
 namespaceFilter:
   enabled: false
   namespaces: []
-    # - sandbox
-    # - sandbox-dsg
+
+enableDataplaneLogs: false
+enableHostLogs: false
 
 serviceAccount:
   name: fluent-bit

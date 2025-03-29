@@ -19,8 +19,12 @@ data:
         storage.backlog.mem_limit 5M
         
     @INCLUDE application-log.conf
+    {{- if .Values.enableDataplaneLogs }}
     @INCLUDE dataplane-log.conf
+    {{- end }}
+    {{- if .Values.enableHostLogs }}
     @INCLUDE host-log.conf
+    {{- end }}
   
   application-log.conf: |
     [INPUT]
@@ -102,6 +106,7 @@ data:
         auto_create_group   true
         extra_user_agent    container-insights
 
+  {{- if .Values.enableDataplaneLogs }}
   dataplane-log.conf: |
     [INPUT]
         Name                systemd
@@ -149,7 +154,9 @@ data:
         log_stream_prefix   ${HOST_NAME}-
         auto_create_group   true
         extra_user_agent    container-insights
-    
+  {{- end }}
+
+  {{- if .Values.enableHostLogs }}
   host-log.conf: |
     [INPUT]
         Name                tail
@@ -197,6 +204,7 @@ data:
         log_stream_prefix   ${HOST_NAME}.
         auto_create_group   true
         extra_user_agent    container-insights
+  {{- end }}
 
   parsers.conf: |
     [PARSER]
