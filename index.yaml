@@ -20,6 +20,22 @@ entries:
   build-manager:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2025-04-01T16:45:50.096921926Z"
+    description: A Helm chart for the build-manager component of Amplication
+    digest: 97de184a79dd3b159c4f471296e727155639249d381832b6ec82117e2555b90c
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: build-manager
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/build-manager-2.0.4/build-manager-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-09-14T12:57:17.154901434Z"
     description: A Helm chart for the build-manager component of Amplication
     digest: f074ba260b66615ebd1a7a3d1b49fa90ae095a69b369490870582c2bb2d1be23
@@ -526,6 +542,22 @@ entries:
     - https://github.com/amplication/amplication-helm-charts/releases/download/fluent-bit-0.1.0/fluent-bit-0.1.0.tgz
     version: 0.1.0
   generated-service:
+  - apiVersion: v2
+    appVersion: 0.0.0
+    created: "2025-04-01T16:45:50.22892513Z"
+    description: A Helm chart for the generated-service component of Amplication
+    digest: a46b86be6bdd8bd6182f87048d531649245d6b2c364f6ab958c8ffefdf597d57
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: generated-service
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/generated-service-2.0.14/generated-service-2.0.14.tgz
+    version: 2.0.14
   - apiVersion: v2
     appVersion: 0.0.0
     created: "2024-12-01T19:44:16.697087128Z"
@@ -1203,6 +1235,22 @@ entries:
   git-sync-manager:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2025-04-01T16:45:50.347776366Z"
+    description: A Helm chart for the git-sync-manager component of Amplication
+    digest: 3fb4a0ba004ce03ebcb1ad20169ca5f34512a70fbafc71141b4ac7d0457e7ac8
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: git-sync-manager
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/git-sync-manager-2.0.4/git-sync-manager-2.0.4.tgz
+    version: 2.0.4
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-12-01T17:44:40.738871249Z"
     description: A Helm chart for the git-sync-manager component of Amplication
     digest: 3d3b6e92d8587f8739cd08207f36ae41a2ea7dcd50f692fca3fcb00c599e093b
@@ -1852,6 +1900,22 @@ entries:
   plugin-api:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2025-04-01T16:45:50.457173565Z"
+    description: A Helm chart for the plugin-api component of Amplication
+    digest: 804c25f672c694ed0d8646854106e1158699252d1787ce021abe4827d4683251
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: plugin-api
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/plugin-api-2.0.12/plugin-api-2.0.12.tgz
+    version: 2.0.12
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2024-12-01T19:44:16.802914553Z"
     description: A Helm chart for the plugin-api component of Amplication
     digest: 3d054f82f40cb9a1f20acf8be7f79fe288ab76e4700d2d1a94870a08d9d23132
@@ -2370,6 +2434,22 @@ entries:
   storage-gateway:
   - apiVersion: v2
     appVersion: 0.0.0
+    created: "2025-04-01T16:45:50.589735043Z"
+    description: A Helm chart for the storage-gateway component of Amplication
+    digest: 02646f59dbaf9a008646a622c1c2a1e8a67e5df702ed0c3fd846bffd9119f915
+    maintainers:
+    - email: levi@amplication.com
+      name: levi van noort
+      url: https://github.com/levivannoort
+    name: storage-gateway
+    sources:
+    - https://github.com/amplication/amplication
+    type: application
+    urls:
+    - https://github.com/amplication/amplication-helm-charts/releases/download/storage-gateway-2.0.3/storage-gateway-2.0.3.tgz
+    version: 2.0.3
+  - apiVersion: v2
+    appVersion: 0.0.0
     created: "2023-09-14T12:57:18.724648697Z"
     description: A Helm chart for the storage-gateway component of Amplication
     digest: fede6ade31e4644174a28a9532704c6f774690a50f1487c88f07165f165ab8af
@@ -2587,4 +2667,4 @@ entries:
     urls:
     - https://github.com/amplication/amplication-helm-charts/releases/download/website-1.1.0/website-1.1.0.tgz
     version: 1.1.0
-generated: "2025-04-01T16:16:27.476668733Z"
+generated: "2025-04-01T16:45:50.590222508Z"
